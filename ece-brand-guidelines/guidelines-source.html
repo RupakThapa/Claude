@@ -102,6 +102,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 .btn.r{background:var(--parch);color:var(--burg);border-color:var(--parch)}
 .btn.o{background:transparent;color:var(--parch);border-color:var(--blush)}
 
+.cap[style*="position:absolute"]{text-shadow:0 1px 4px rgba(0,0,0,.55)}
 .dodont{font:700 7pt/1.45 var(--sans);letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:5pt;margin-bottom:6pt}
 .do{color:var(--olive)} .dont{color:var(--burg)}
 .mark-ph{font:500 6.4pt/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
@@ -152,13 +153,8 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
       <path d="M452 150 V200 M440 164 H464" stroke-width="2.4"/>
       <path d="M150 90 q7 -6 14 0 q7 -6 14 0 M190 70 q5 -4 10 0 q5 -4 10 0 M118 112 q4 -3 8 0 q4 -3 8 0" stroke-width="1.1"/>
     </g>
-    <g fill="url(#hatch)" stroke="none" opacity=".55">
-      <path d="M0 214 C90 188 170 196 236 206 C270 211 330 210 368 202 C450 186 520 190 600 206 L600 238 C420 272 330 264 250 250 C170 236 80 232 0 262Z"/>
-    </g>
-    <g fill="url(#hatchFine)" stroke="none" opacity=".45">
-      <path d="M0 322 C120 300 190 300 238 310 L200 400 L0 400Z"/>
-      <path d="M392 318 C460 300 530 296 600 300 L600 400 L420 400Z"/>
-    </g>
+    
+    
     <g fill="currentColor">
       <g transform="translate(282 300) scale(1.25)"><circle cx="0" cy="-3" r="3"/><path d="M-5 22 L-3 3 Q0 -1 3 3 L5 22Z"/></g>
       <g transform="translate(300 296) scale(1.3)"><circle cx="0" cy="-3" r="3"/><path d="M-5.5 22 L-3 3 Q0 -1 3 3 L5.5 22Z"/></g>
@@ -180,8 +176,8 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
       <path d="M140 290 C120 300 100 310 92 326 H208 C200 310 180 300 160 290" stroke-width="1.6"/>
       <path d="M86 336 H214 M92 326 L86 336 M208 326 L214 336" stroke-width="1.6"/>
     </g>
-    <path d="M86 150 H214 C210 190 186 218 150 220 C114 218 90 190 86 150Z" fill="url(#hatch)" opacity=".5"/>
-    <path d="M100 326 C110 312 124 304 142 296 L142 326Z" fill="url(#hatchFine)" opacity=".6"/>
+    
+    
   </symbol>
 
   <!-- Candle engraving -->
@@ -210,7 +206,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
       <circle cx="220" cy="100" r="2.4" fill="currentColor"/>
       <path d="M232 132 C246 140 256 150 262 164 M252 150 c6 -6 14 -6 18 0 M258 164 c8 -2 12 2 14 8 M248 142 c4 -8 12 -10 18 -6" stroke-width="1.2"/>
     </g>
-    <path d="M60 156 C100 160 150 158 190 140 C170 160 140 168 110 168 C90 168 72 164 60 156Z" fill="url(#hatch)" opacity=".55"/>
+    
   </symbol>
 
   <!-- Rose window -->
@@ -491,7 +487,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
           <div class="sw"><div class="chip" style="background:var(--olive);height:.9in"><span style="color:var(--parch);font-size:12pt">Vine Olive</span></div><div class="meta"><b>HEX</b>#3F4A35<br><b>RGB</b>63 · 74 · 53<br><b>CMYK</b>65 · 45 · 80 · 45</div><div class="role">Tertiary buttons, Fourth Day and growth themes.</div></div>
           <div class="sw"><div class="chip" style="background:var(--blush);height:.9in"><span style="color:var(--wine);font-size:12pt">Blush</span></div><div class="meta"><b>HEX</b>#E6C9C3<br><b>RGB</b>230 · 201 · 195<br><b>CMYK</b>8 · 22 · 18 · 0</div><div class="role">Secondary text on burgundy, soft highlights.</div></div>
           <div class="sw"><div class="chip" style="background:var(--wine);height:.9in"><span style="color:var(--blush);font-size:12pt">Deep Wine</span></div><div class="meta"><b>HEX</b>#43141A<br><b>RGB</b>67 · 20 · 26<br><b>CMYK</b>40 · 90 · 70 · 60</div><div class="role">Footers, image scrims, hover states.</div></div>
-          <div class="sw" style="grid-column:span 2;display:flex"><div style="background:var(--sepia);width:1.3in"></div><div><div class="meta"><b style="width:auto">SEPIA</b><br><b>HEX</b>#8C7560 &nbsp; <b>RGB</b>140 · 117 · 96<br><b>CMYK</b>35 · 45 · 60 · 15</div><div class="role">Engraved illustrations, captions, running heads, fine rules.</div></div></div>
+          <div class="sw" style="grid-column:span 2;display:flex"><div style="background:var(--sepia);width:1.3in"></div><div><div class="meta"><b style="width:auto">SEPIA</b><br><b>HEX</b>#8C7560 &nbsp; <b>RGB</b>140 · 117 · 96<br><b>CMYK</b>35 · 45 · 60 · 15</div><div class="role">Line illustrations, captions, running heads.</div></div></div>
         </div>
       </div>
       <div>
@@ -616,7 +612,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page dark divider">
   <div class="num">05</div>
   <svg style="position:absolute;right:.6in;top:.9in;width:3.6in;color:var(--blush);opacity:.6"><use href="#dove"/></svg>
-  <div class="ttl"><span class="script">light &amp; line</span><h1>Imagery &amp;<br>Graphic Elements</h1><p>Warm, honest photography and hand-engraved illustration: sanctuary light, open hands and the long road home.</p></div>
+  <div class="ttl"><span class="script">light &amp; line</span><h1>Imagery &amp;<br>Graphic Elements</h1><p>Warm, honest photography and simple line illustration: sanctuary light, open hands and the long road home.</p></div>
   <div class="foot"><span>Eastern Carolina Emmaus</span><span class="pn">21</span></div>
 </section>
 
@@ -635,38 +631,19 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
           <li>Eastern NC landscapes: country roads, fields, water at dawn</li>
           <li>Fellowship: laughter, embraces, a shared table</li>
         </ul>
-        <p class="mark-ph" style="margin-top:14pt">▲ These are art-direction frames. Replace them with ECE's own photography.</p>
+        <p class="mark-ph" style="margin-top:14pt">▲ Sample images created for art direction. Swap in ECE's own photography as it becomes available.</p>
       </div>
       <div style="display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;gap:8pt">
         <div style="grid-row:span 2;position:relative;overflow:hidden;background:#1A0709">
-          <svg viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-            <rect width="300" height="420" fill="#1F090C"/>
-            <path d="M40 420 V150 Q150 20 260 150 V420" fill="#2E1014"/>
-            <path d="M90 60 L20 420 H130 Z" fill="url(#beam)"/><path d="M150 60 L110 420 H230 Z" fill="url(#beam)" opacity=".6"/>
-            <use href="#rosewin" x="80" y="60" width="140" height="140"/>
-            <circle cx="150" cy="130" r="120" fill="url(#glow)" opacity=".25"/>
-            <path d="M0 360 H300 V420 H0Z" fill="#14060A"/><path d="M30 350 h240 v10 h-240z" fill="#3A1A1E"/>
-          </svg>
+          <img alt="" src="img/stained.jpg" style="display:block;object-fit:cover;width:100%;height:100%">
           <span class="cap" style="position:absolute;left:8pt;top:8pt;color:var(--blush)">Sanctuary · stained glass</span>
         </div>
         <div style="position:relative;overflow:hidden">
-          <svg viewBox="0 0 200 260" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-            <rect width="200" height="260" fill="#2A0E10"/>
-            <circle cx="72" cy="120" r="72" fill="url(#glow)"/><circle cx="120" cy="104" r="66" fill="url(#glow)"/><circle cx="152" cy="146" r="52" fill="url(#glow)"/>
-            <g fill="#F2E3C8"><rect x="62" y="134" width="20" height="130"/><rect x="111" y="118" width="18" height="146"/><rect x="145" y="164" width="15" height="100"/></g>
-            <g fill="#FFE9B5"><path d="M72 100 c7 10 9 16 7 22 c-2 6 -12 6 -14 0 c-2 -6 0 -12 7 -22z"/><path d="M120 86 c6 9 8 15 6 20 c-2 5 -11 5 -13 0 c-2 -5 0 -11 7 -20z"/><path d="M152.5 136 c5 8 7 13 5 17 c-2 4 -9 4 -11 0 c-2 -4 0 -9 6 -17z"/></g>
-          </svg>
+          <img alt="" src="img/candles.jpg" style="display:block;object-fit:cover;width:100%;height:100%">
           <span class="cap" style="position:absolute;left:8pt;top:8pt;color:var(--blush)">Candlelight</span>
         </div>
         <div style="position:relative;overflow:hidden">
-          <svg viewBox="0 0 200 260" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-            <rect width="200" height="260" fill="url(#dawn)"/>
-            <circle cx="100" cy="150" r="62" fill="url(#sunG)"/>
-            <path d="M0 150 C40 140 80 144 100 148 C130 154 160 140 200 146 V260 H0Z" fill="#6B3A3A"/>
-            <path d="M0 184 C60 170 130 172 200 180 V260 H0Z" fill="#4A2226"/>
-            <path d="M30 260 C70 210 92 172 98 150 L102 150 C110 174 136 214 176 260Z" fill="#C9A487"/>
-            <path d="M150 116 v28 M142 125 h16" stroke="#2A0E10" stroke-width="2.4"/>
-          </svg>
+          <img alt="" src="img/roadp.jpg" style="display:block;object-fit:cover;width:100%;height:100%">
           <span class="cap" style="position:absolute;left:8pt;top:8pt;color:var(--parch)">The road · dawn</span>
         </div>
       </div>
@@ -682,9 +659,9 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <h1 style="margin-bottom:14pt">One warm, consistent grade</h1>
     <div class="grid g3" style="gap:12pt">
-      <div><div style="height:2.25in;overflow:hidden"><svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;filter:saturate(1.25) hue-rotate(-12deg) brightness(1.05)"><rect width="300" height="160" fill="url(#dawn)"/><circle cx="150" cy="88" r="55" fill="url(#sunG)"/><path d="M0 98 C70 86 130 92 170 96 C220 102 260 90 300 94 V160 H0Z" fill="#6B3A3A"/><path d="M80 160 C120 130 140 110 148 96 L154 96 C164 116 190 140 230 160Z" fill="#C9A487"/></svg></div><h3 style="margin-top:8pt">1 · Natural</h3><p class="small">Straight from camera. Fine for news and event recaps.</p></div>
-      <div><div style="height:2.25in;overflow:hidden"><svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;filter:sepia(.28) saturate(.85) contrast(.95) brightness(1.02)"><rect width="300" height="160" fill="url(#dawn)"/><circle cx="150" cy="88" r="55" fill="url(#sunG)"/><path d="M0 98 C70 86 130 92 170 96 C220 102 260 90 300 94 V160 H0Z" fill="#6B3A3A"/><path d="M80 160 C120 130 140 110 148 96 L154 96 C164 116 190 140 230 160Z" fill="#C9A487"/></svg></div><h3 style="margin-top:8pt">2 · Brand warm grade</h3><p class="small">Default. Slightly warmer, softly desaturated, lifted shadows. Ask SAM IT for the preset.</p></div>
-      <div><div style="height:2.25in;overflow:hidden;position:relative;background:var(--burg)"><svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;filter:grayscale(1) contrast(1.1);mix-blend-mode:screen;opacity:.6"><rect width="300" height="160" fill="url(#dawn)"/><circle cx="150" cy="88" r="55" fill="url(#sunG)"/><path d="M0 98 C70 86 130 92 170 96 C220 102 260 90 300 94 V160 H0Z" fill="#6B3A3A"/><path d="M80 160 C120 130 140 110 148 96 L154 96 C164 116 190 140 230 160Z" fill="#C9A487"/></svg><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 17pt var(--disp);color:var(--parch)">Behind the Scenes</div></div><h3 style="margin-top:8pt">3 · Burgundy duotone</h3><p class="small">For hero banners and headers with text on top. Keeps any photo on-brand.</p></div>
+      <div><div style="height:2.25in;overflow:hidden"><img alt="" src="img/bread.jpg" style="display:block;object-fit:cover;width:100%;height:100%"></div><h3 style="margin-top:8pt">1 · Natural</h3><p class="small">Straight from camera. Fine for news and event recaps.</p></div>
+      <div><div style="height:2.25in;overflow:hidden"><img alt="" src="img/bread.jpg" style="display:block;object-fit:cover;width:100%;height:100%;filter:sepia(.3) saturate(.85) contrast(.95) brightness(1.03)"></div><h3 style="margin-top:8pt">2 · Brand warm grade</h3><p class="small">Default. Slightly warmer, softly desaturated, lifted shadows. Ask SAM IT for the preset.</p></div>
+      <div><div style="height:2.25in;overflow:hidden;position:relative;background:var(--burg)"><img alt="" src="img/bread.jpg" style="display:block;object-fit:cover;width:100%;height:100%;filter:grayscale(1) contrast(1.1);mix-blend-mode:screen;opacity:.6"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 17pt var(--disp);color:var(--parch)">Behind the Scenes</div></div><h3 style="margin-top:8pt">3 · Burgundy duotone</h3><p class="small">For hero banners and headers with text on top. Keeps any photo on-brand.</p></div>
     </div>
     <div class="grid g2" style="gap:24pt;margin-top:16pt">
       <div><p class="dodont do">✓ Do</p><ul class="dots"><li>Use ECE's own people and places, with permission</li><li>Keep a burgundy scrim (Deep Wine, 40–60%) under any text on photos</li><li>Credit photographers in captions when asked</li></ul></div>
@@ -700,8 +677,8 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:2.8in 1fr;gap:.45in">
       <div>
-        <h1 style="margin-bottom:12pt">Engraved line art</h1>
-        <p>Like the chalice and the Madonna engravings in our reference themes, ECE illustrations are fine line drawings with hatched shading, the look of an old Bible plate. They add warmth where we have no photograph, and sit behind content as quiet watermarks.</p>
+        <h1 style="margin-bottom:12pt">Simple line art</h1>
+        <p>ECE illustrations are simple, single-weight outline drawings with no shading or fills. They are calm and friendly, and they leave the detailed engraving to the logo. They add warmth where we have no photograph, and sit behind content as quiet watermarks.</p>
         <ul class="dots" style="margin-top:12pt">
           <li>Line colour: <b>Sepia</b> on light, <b>Blush</b> on burgundy</li>
           <li>As a watermark: 25–40% opacity, bleeding off the edge</li>
@@ -710,8 +687,8 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
       </div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10pt;align-content:start">
         <div style="grid-column:span 4;background:var(--linen);height:3.3in;overflow:hidden;position:relative"><svg style="position:absolute;left:50%;transform:translateX(-50%);top:-.1in;width:5.2in;color:var(--sepia)"><use href="#road"/></svg><span class="cap" style="position:absolute;left:9pt;top:9pt">The Road to Emmaus · signature illustration</span></div>
-        <div style="background:#fff;border:.6pt solid var(--rule);height:1.75in;display:flex;align-items:center;justify-content:center"><svg style="height:1.4in;width:1.1in;color:var(--sepia)"><use href="#chalice"/></svg></div>
-        <div style="background:#fff;border:.6pt solid var(--rule);height:1.75in;display:flex;align-items:center;justify-content:center"><svg style="height:1.4in;width:.9in;color:var(--sepia)"><use href="#candle"/></svg></div>
+        <div style="background:#fff;height:1.75in;display:flex;align-items:center;justify-content:center"><svg style="height:1.4in;width:1.1in;color:var(--sepia)"><use href="#chalice"/></svg></div>
+        <div style="background:#fff;height:1.75in;display:flex;align-items:center;justify-content:center"><img alt="" src="img/eng-candle-sepia.png" style="display:block;object-fit:contain;height:1.4in;width:.9in;"></div>
         <div style="background:var(--burg);height:1.75in;display:flex;align-items:center;justify-content:center"><svg style="height:1.1in;width:1.45in;color:var(--blush)"><use href="#dove"/></svg></div>
         <div style="background:var(--burg);height:1.75in;display:flex;align-items:center;justify-content:center"><svg style="height:1.4in;width:1.1in;color:var(--blush)"><use href="#chalice"/></svg></div>
         <div class="cap">Chalice · Communion</div><div class="cap">Candle · Candlelight</div><div class="cap">Dove · Spirit</div><div class="cap">On burgundy</div>
@@ -728,23 +705,23 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
     <div class="grid" style="grid-template-columns:1fr 1fr;gap:.45in">
       <div>
         <h2 style="margin-bottom:10pt">Simple line icons</h2>
-        <p class="small" style="margin-bottom:12pt">1.5 px stroke on a 24 px grid, rounded ends, no fills. Burgundy on light, Parchment on dark. Always paired with a label.</p>
+        <p class="small" style="margin-bottom:12pt">One consistent monoline stroke, rounded ends, no fills. Burgundy on light, Parchment on dark. Always paired with a label.</p>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8pt;text-align:center">
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-cross"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Faith</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-road"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Attend</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-people"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">BTS</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-heart"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Sponsor</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-gift"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Give</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-clock"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Vigil</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-chalice"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Communion</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-candle"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Candlelight</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-bread"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Agape</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-book"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Scripture</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-cal"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Events</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-dove"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Spirit</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-mail"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Contact</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-lock"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Members</span></div>
-          <div class="card" style="padding:16pt 4pt 12pt"><svg style="width:30pt;height:30pt;color:var(--burg);margin:0 auto 5pt"><use href="#i-fb"/></svg><span class="cap" style="font-size:6pt;letter-spacing:.1em">Facebook</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-cross-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Faith</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-road-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Attend</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-people-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">BTS</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-heart-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Sponsor</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-gift-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Give</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-clock-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Vigil</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-chalice-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Communion</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-candle-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Candlelight</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-bread-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Agape</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-book-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Scripture</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-cal-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Events</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-dove-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Spirit</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-mail-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Contact</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-lock-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Members</span></div>
+          <div class="card" style="padding:16pt 4pt 12pt"><img alt="" src="img/ic-pray-burg.png" style="display:block;width:30pt;height:30pt;margin:0 auto 5pt"><span class="cap" style="font-size:6pt;letter-spacing:.1em">Prayer</span></div>
         </div>
       </div>
       <div>
@@ -768,7 +745,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <!-- ============ 26. DIVIDER 06 VOICE ============ -->
 <section class="page dark divider">
   <div class="num">06</div>
-  <svg style="position:absolute;right:1in;top:1in;width:2.6in;color:var(--blush);opacity:.55"><use href="#candle"/></svg>
+  <img alt="" src="img/eng-candle-blush.png" style="display:block;object-fit:contain;position:absolute;right:1in;top:1in;width:2.6in;opacity:.55;height:auto">
   <div class="ttl"><span class="script">how we sound</span><h1>Voice &amp;<br>Language</h1><p>We write the way a good sponsor talks: warm, plain, honest and never in a hurry.</p></div>
   <div class="foot"><span>Eastern Carolina Emmaus</span><span class="pn">26</span></div>
 </section>
@@ -860,7 +837,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
         <div style="display:flex;gap:4pt"><span class="btn s" style="font-size:4.6pt;padding:4pt 6pt">Sponsor</span><span class="btn p" style="font-size:4.6pt;padding:4pt 6pt">Give</span></div>
       </div>
       <div style="height:2.3in;position:relative;background:var(--wine);overflow:hidden">
-        <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;filter:grayscale(1);mix-blend-mode:screen;opacity:.5"><rect width="600" height="200" fill="url(#dawn)"/><circle cx="300" cy="100" r="80" fill="url(#sunG)"/><path d="M0 116 C120 100 240 108 300 112 C400 118 500 102 600 110 V200 H0Z" fill="#6B3A3A"/><path d="M200 200 C260 160 290 130 296 112 L304 112 C314 134 350 168 420 200Z" fill="#C9A487"/></svg>
+        <img alt="" src="img/roadw.jpg" style="display:block;object-fit:cover;position:absolute;inset:0;width:100%;height:100%;filter:grayscale(1);mix-blend-mode:screen;opacity:.5">
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(67,20,26,.85),rgba(67,20,26,.2))"></div>
         <div style="position:absolute;left:22pt;top:34pt;width:3.2in"><span class="script" style="font-size:17pt;color:var(--gold)">Welcome, pilgrim</span><div style="font:400 23pt/1.05 var(--disp);color:var(--parch)">The road is easier walked together.</div><p style="font-size:7.4pt;color:var(--blush);margin:6pt 0 8pt;line-height:1.4">A three-day experience for Christian adults: a chance to step out of the ordinary and meet Christ again on the road.</p><span class="btn r" style="font-size:4.8pt;padding:5pt 8pt">Attend a Walk</span> <span class="btn o" style="font-size:4.8pt;padding:5pt 8pt">Sponsor a Pilgrim</span></div>
         <svg style="position:absolute;left:0;width:100%;bottom:-1px;height:8px;color:var(--parch)"><use href="#torn"/></svg>
@@ -871,16 +848,16 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
       </div>
       <div style="background:var(--burg);padding:12pt 20pt 14pt">
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8pt">
-          <div style="border:.6pt solid var(--blush);padding:8pt 4pt;text-align:center;color:var(--parch)"><svg style="width:13pt;height:13pt;margin:0 auto 3pt"><use href="#i-road"/></svg><div style="font:400 8pt var(--disp)">Attend a Walk</div></div>
-          <div style="border:.6pt solid var(--blush);padding:8pt 4pt;text-align:center;color:var(--parch)"><svg style="width:13pt;height:13pt;margin:0 auto 3pt"><use href="#i-people"/></svg><div style="font:400 8pt var(--disp)">Behind the Scenes</div></div>
-          <div style="border:.6pt solid var(--blush);padding:8pt 4pt;text-align:center;color:var(--parch)"><svg style="width:13pt;height:13pt;margin:0 auto 3pt"><use href="#i-heart"/></svg><div style="font:400 8pt var(--disp)">Sponsor</div></div>
-          <div style="border:.6pt solid var(--blush);padding:8pt 4pt;text-align:center;color:var(--parch)"><svg style="width:13pt;height:13pt;margin:0 auto 3pt"><use href="#i-gift"/></svg><div style="font:400 8pt var(--disp)">Give</div></div>
+          <div style="border:.6pt solid var(--blush);padding:8pt 4pt;text-align:center;color:var(--parch)"><img alt="" src="img/ic-road-parch.png" style="display:block;width:13pt;height:13pt;margin:0 auto 3pt"><div style="font:400 8pt var(--disp)">Attend a Walk</div></div>
+          <div style="border:.6pt solid var(--blush);padding:8pt 4pt;text-align:center;color:var(--parch)"><img alt="" src="img/ic-people-parch.png" style="display:block;width:13pt;height:13pt;margin:0 auto 3pt"><div style="font:400 8pt var(--disp)">Behind the Scenes</div></div>
+          <div style="border:.6pt solid var(--blush);padding:8pt 4pt;text-align:center;color:var(--parch)"><img alt="" src="img/ic-heart-parch.png" style="display:block;width:13pt;height:13pt;margin:0 auto 3pt"><div style="font:400 8pt var(--disp)">Sponsor</div></div>
+          <div style="border:.6pt solid var(--blush);padding:8pt 4pt;text-align:center;color:var(--parch)"><img alt="" src="img/ic-gift-parch.png" style="display:block;width:13pt;height:13pt;margin:0 auto 3pt"><div style="font:400 8pt var(--disp)">Give</div></div>
         </div>
       </div>
       <div style="flex:1;padding:18pt 20pt;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14pt;align-items:center">
         <div><div style="font:400 14pt/1.1 var(--disp)">From the newsletter</div></div>
-        <div style="padding-top:8pt"><svg style="width:12pt;height:12pt;color:var(--burg);margin-bottom:4pt"><use href="#i-book"/></svg><div style="font:400 10pt var(--disp)">[Month] newsletter</div><p style="font-size:7pt;line-height:1.45;margin-top:3pt">Walk reports, upcoming dates and prayer requests.</p></div>
-        <div style="padding-top:8pt"><svg style="width:12pt;height:12pt;color:var(--burg);margin-bottom:4pt"><use href="#i-book"/></svg><div style="font:400 10pt var(--disp)">Community needs</div><p style="font-size:7pt;line-height:1.45;margin-top:3pt">Current needs and the ECE wish list.</p></div>
+        <div style="padding-top:8pt"><img alt="" src="img/ic-book-burg.png" style="display:block;width:12pt;height:12pt;margin-bottom:4pt"><div style="font:400 10pt var(--disp)">[Month] newsletter</div><p style="font-size:7pt;line-height:1.45;margin-top:3pt">Walk reports, upcoming dates and prayer requests.</p></div>
+        <div style="padding-top:8pt"><img alt="" src="img/ic-book-burg.png" style="display:block;width:12pt;height:12pt;margin-bottom:4pt"><div style="font:400 10pt var(--disp)">Community needs</div><p style="font-size:7pt;line-height:1.45;margin-top:3pt">Current needs and the ECE wish list.</p></div>
       </div>
       <div style="background:var(--wine);padding:6pt 20pt;display:flex;justify-content:space-between;align-items:center;font:500 4.6pt var(--sans);letter-spacing:.14em;color:var(--blush)"><span>© EASTERN CAROLINA EMMAUS · A 501(C)(3) NON-PROFIT</span><span style="display:flex;align-items:center;gap:3pt"><svg style="width:8pt;height:8pt;color:var(--parch)"><use href="#i-fb"/></svg>FOLLOW US ON FACEBOOK</span></div>
     </div>
@@ -941,7 +918,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
     <h3 style="margin-top:20pt">Navigation bar</h3>
     <div style="margin-top:8pt;background:#fff;border:.6pt solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:10pt 16pt">
       <div style="display:flex;align-items:center;gap:7pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/02-horizontal-burg.svg" style="display:block;height:36pt"></div>
-      <div style="display:flex;gap:13pt;font:500 7.2pt var(--sans);letter-spacing:.03em;white-space:nowrap"><span style="border-bottom:1.2pt solid var(--burg);padding-bottom:2pt">Home</span><span>About</span><span>Attend a Walk</span><span>Behind the Scenes</span><span>Prayer Vigil</span><span>News</span><span style="display:flex;align-items:center;gap:3pt;color:var(--burg)"><svg style="width:10pt;height:10pt"><use href="#i-lock"/></svg>Members</span></div>
+      <div style="display:flex;gap:13pt;font:500 7.2pt var(--sans);letter-spacing:.03em;white-space:nowrap"><span style="border-bottom:1.2pt solid var(--burg);padding-bottom:2pt">Home</span><span>About</span><span>Attend a Walk</span><span>Behind the Scenes</span><span>Prayer Vigil</span><span>News</span><span style="display:flex;align-items:center;gap:3pt;color:var(--burg)"><img alt="" src="img/ic-lock-burg.png" style="display:block;width:10pt;height:10pt">Members</span></div>
       <div style="display:flex;gap:6pt"><span class="btn s" style="padding:7pt 11pt">Sponsor</span><span class="btn p" style="padding:7pt 11pt">Give</span></div>
     </div>
     <p class="small" style="margin-top:5pt">Montserrat 500, sentence case. Active page underlined in Burgundy. The <b>Members</b> link carries the lock icon and leads to the password-protected area.</p>
@@ -1012,7 +989,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
           <li>A short verse is welcome as text, in italic</li>
         </ul>
         <div class="card" style="margin-top:16pt;display:flex;gap:12pt;align-items:flex-start;background:var(--linen);border:none">
-          <svg style="width:24pt;height:24pt;color:var(--burg);flex:none"><use href="#i-lock"/></svg>
+          <img alt="" src="img/ic-lock-burg.png" style="display:block;width:24pt;height:24pt;flex:none">
           <div><h3>Members area</h3><p class="small">A password-protected <b>Members</b> link in the site navigation opens the board's shared SharePoint folders. Label it with the lock icon, and use the same name in emails (“Members area,” not “the portal” or “the drive”).</p></div>
         </div>
       </div>
