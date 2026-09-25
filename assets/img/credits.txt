@@ -1,0 +1,76 @@
+Photo credits
+=============
+All photos: Unsplash License (https://unsplash.com/license). Free to use, attribution appreciated.
+
+STATUS: the files in this folder are placeholders until you run _tools/fetch-images.py
+(Unsplash was not reachable from the build environment). The script downloads the photos
+below, converts them to WebP and rewrites this file.
+
+home-remote-admin-1600.webp / home-remote-admin-800.webp / og/home.jpg
+  Used on:      index.html
+  Photographer: Elen Sher
+  Source:       https://unsplash.com/photos/0dF7UzD2Yd8
+
+solutions-remote-admin-1600.webp / solutions-remote-admin-800.webp / og/solutions.jpg
+  Used on:      solutions.html
+  Photographer: B Y G
+  Source:       https://unsplash.com/photos/0AVtGrvGIAE
+
+insurance-verification-desk-1600.webp / insurance-verification-desk-800.webp / og/insurance-verification.jpg
+  Used on:      insurance-verification.html
+  Photographer: B Y G
+  Source:       https://unsplash.com/photos/eVXadjUva8Y
+
+prior-authorization-chart-1600.webp / prior-authorization-chart-800.webp / og/prior-authorization.jpg
+  Used on:      prior-authorization.html
+  Photographer: Vitaly Gariev
+  Source:       https://unsplash.com/photos/8WYkI3cEZm8
+
+virtual-medical-assistant-headset-1600.webp / virtual-medical-assistant-headset-800.webp / og/virtual-medical-assistant.jpg
+  Used on:      virtual-medical-assistant.html
+  Photographer: Vitaly Gariev
+  Source:       https://unsplash.com/photos/-OaLxfTSIww
+
+referral-coordination-consult-1600.webp / referral-coordination-consult-800.webp / og/referral-management.jpg
+  Used on:      referral-management.html
+  Photographer: National Cancer Institute
+  Source:       https://unsplash.com/photos/TFJw-mTWw_U
+
+medical-billing-calculator-1600.webp / medical-billing-calculator-800.webp / og/medical-billing-support.jpg
+  Used on:      medical-billing-support.html
+  Photographer: Kelly Sikkema
+  Source:       https://unsplash.com/photos/xoU52jUVUXA
+
+about-team-documents-1600.webp / about-team-documents-800.webp / og/about.jpg
+  Used on:      about.html
+  Photographer: Andreea Avramescu
+  Source:       https://unsplash.com/photos/wR56AUlEsE4
+
+insights-notebook-stethoscope-1600.webp / insights-notebook-stethoscope-800.webp / og/insights.jpg
+  Used on:      insights.html
+  Photographer: Abdulai Sayni
+  Source:       https://unsplash.com/photos/u2EjDa_hYJI
+
+contact-discovery-call-1600.webp / contact-discovery-call-800.webp / og/contact.jpg
+  Used on:      contact.html
+  Photographer: Vitaly Gariev
+  Source:       https://unsplash.com/photos/egCFrNJ6Djw
+
+article-clinic-reception-1600.webp / article-clinic-reception-800.webp / og/article-front-desk-denials.jpg
+  Used on:      claim-denials-start-at-the-front-desk.html
+  Photographer: Malcolm Choong
+  Source:       https://unsplash.com/photos/27zLImvxwV0
+
+article-clipboard-notes-1600.webp / article-clipboard-notes-800.webp / og/article-prior-auth-log.jpg
+  Used on:      prior-auth-tracking-log.html
+  Photographer: Vitaly Gariev
+  Source:       https://unsplash.com/photos/xDNwySMfR5I
+
+article-practice-paperwork-1600.webp / article-practice-paperwork-800.webp / og/article-outsourcing-checklist.jpg
+  Used on:      outsourcing-front-office-checklist.html
+  Photographer: Dimitri Karastelev
+  Source:       https://unsplash.com/photos/ZH4FUYiaczY
+
+Font
+  Newsreader (variable, latin subset), SIL Open Font License 1.1. See assets/fonts/OFL-Newsreader.txt
+  Source: https://github.com/productiontype/Newsreader via Fontsource
