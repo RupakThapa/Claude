@@ -34,7 +34,7 @@ body{font-family:var(--serif);color:var(--ink);-webkit-print-color-adjust:exact;
 .run b{color:var(--burg);font-weight:600}
 .foot{position:absolute;bottom:.34in;left:.75in;right:.75in;display:flex;justify-content:space-between;align-items:center;font:500 6.8pt/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--sepia)}
 .foot .pn{font:400 10pt var(--disp);letter-spacing:0;color:var(--burg)}
-.foot::before{content:"";position:absolute;left:0;right:0;top:-.14in;border-top:.5pt solid var(--rule)}
+
 
 .eyebrow{font:600 7.5pt/1.2 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--burg);margin-bottom:10pt;display:flex;align-items:center;gap:8pt}
 .eyebrow::before{content:"";width:22pt;border-top:1pt solid currentColor}
@@ -52,12 +52,12 @@ p+p{margin-top:7pt}
 .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 .split{display:grid;grid-template-columns:3.1in 1fr;gap:.45in;height:100%}
 .col-intro h1{margin-bottom:14pt}
-.rule{border-top:.6pt solid var(--rule);margin:12pt 0}
+.rule{margin:10pt 0}
 ul.dots{list-style:none}
 ul.dots li{font-size:11pt;line-height:1.4;padding-left:13pt;position:relative;margin-bottom:5pt}
 ul.dots li::before{content:"";position:absolute;left:0;top:.52em;width:4pt;height:4pt;background:var(--rose);transform:rotate(45deg)}
-.card{background:#fff;border:.6pt solid var(--rule);padding:14pt}
-.frame{border:.75pt solid var(--rule);padding:5pt;background:#fff}
+.card{background:#fff;padding:14pt}
+.frame{padding:5pt;background:#fff}
 .note{border-left:2pt solid var(--gold);background:#FBF7EF;padding:9pt 12pt;font:400 8.2pt/1.5 var(--sans);color:#4c403b}
 .note b{color:var(--burg);font-weight:600}
 svg{display:block}
@@ -80,7 +80,7 @@ svg{display:block}
 .torn{position:absolute;left:0;width:100%;height:26px}
 
 /* swatches */
-.sw{border:.6pt solid var(--rule);background:#fff}
+.sw{background:#fff}
 .sw .chip{height:1.25in;position:relative}
 .sw .chip span{position:absolute;left:10pt;bottom:9pt;font:400 15pt var(--disp)}
 .sw .meta{white-space:nowrap;padding:8pt 10pt;font:500 7.4pt/1.65 var(--sans);color:#4c403b;letter-spacing:.02em}
@@ -89,8 +89,9 @@ svg{display:block}
 
 /* table */
 table{border-collapse:collapse;width:100%}
-th{font:600 6.8pt/1.3 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--sepia);text-align:left;padding:5pt 7pt;border-bottom:.8pt solid var(--burg)}
-td{font:400 10pt/1.35 var(--serif);padding:5.5pt 7pt;border-bottom:.5pt solid var(--rule);vertical-align:top}
+th{font:600 6.8pt/1.3 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--sepia);text-align:left;padding:5pt 7pt 7pt}
+td{font:400 10pt/1.35 var(--serif);padding:5pt 7pt;vertical-align:top}
+tr:nth-child(even) td{background:rgba(232,221,208,.4)}
 td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-space:nowrap}
 
 /* buttons */
@@ -269,7 +270,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:3.6in 1fr">
       <div>
-        <div class="eyebrow">Inside this guide</div>
         <h1>Contents</h1>
         <p class="lede" style="margin-top:14pt">Use this guide whenever you make something that carries the Eastern Carolina Emmaus name, whether that's a web page, a walk flyer, a Facebook post or a name tag.</p>
         <svg style="width:2.3in;margin-top:.45in;color:var(--sepia);opacity:.8"><use href="#chalice"/></svg>
@@ -282,7 +282,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
           <tr><td class="k" style="width:.5in">04</td><td><h4 style="margin:0">Typography</h4><span class="small">Typefaces, hierarchy, rules</span></td><td class="k toc-pg" style="text-align:right"></td></tr>
           <tr><td class="k" style="width:.5in">05</td><td><h4 style="margin:0">Imagery &amp; Graphic Elements</h4><span class="small">Photography, illustration, icons, ornaments</span></td><td class="k toc-pg" style="text-align:right"></td></tr>
           <tr><td class="k" style="width:.5in">06</td><td><h4 style="margin:0">Voice &amp; Language</h4><span class="small">Tone, our own words, writing mechanics</span></td><td class="k toc-pg" style="text-align:right"></td></tr>
-          <tr><td class="k" style="width:.5in">07</td><td><h4 style="margin:0">Applications</h4><span class="small">Website, print, email, social, walk weekend</span></td><td class="k toc-pg" style="text-align:right"></td></tr>
+          <tr><td class="k" style="width:.5in">07</td><td><h4 style="margin:0">Applications</h4><span class="small">Website, stationery, email</span></td><td class="k toc-pg" style="text-align:right"></td></tr>
         </table>
       </div>
     </div>
@@ -304,7 +304,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:1fr 3.75in;gap:.5in">
       <div>
-        <div class="eyebrow">Our Story</div>
         <h1>The road is easier<br>walked together.</h1>
         <p class="cap" style="margin:6pt 0 14pt">Primary tagline · Marcellus, sentence case, with the full stop</p>
         <p class="lede" style="margin-bottom:10pt">Eastern Carolina Emmaus (ECE) is a community of Christian adults across eastern North Carolina who host the Walk to Emmaus: a three-day experience where pilgrims step out of the ordinary and meet Christ again on the road.</p>
@@ -347,7 +346,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
     <div class="split" style="grid-template-columns:1fr 3.5in;gap:.5in">
       <div class="frame" style="display:flex;align-items:center;justify-content:center;background:var(--parch)"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/00-main-burg.svg" style="display:block;width:88%"></div>
       <div>
-        <div class="eyebrow">The Mark</div>
         <h2 style="margin-bottom:12pt">A cross over the land we serve</h2>
         <p>The ECE logo is drawn like an old engraving, which makes it a natural partner for our illustration style. Every line was drawn on purpose, so the logo is always placed from the master files, never redrawn.</p>
         <div class="rule"></div>
@@ -368,7 +366,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page">
   <div class="run"><span><b>02</b> · Logo</span><span>Lockups</span></div>
   <div class="inner">
-    <div class="eyebrow">Logo Versions</div>
     <h1 style="margin-bottom:16pt">Five lockups, one family</h1>
     <div class="grid" style="grid-template-columns:1fr 1.25fr 1fr;grid-template-rows:2.55in 2.05in;gap:12pt">
       <div class="frame" style="display:flex;flex-direction:column"><div style="flex:1;display:flex;align-items:center;justify-content:center;background:var(--parch)"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/01-primary-stacked-burg.svg" style="display:block;height:1.75in"></div><div style="padding:7pt 4pt 2pt"><h3 style="margin:0">A · Primary stacked</h3><span class="small">First choice: covers, banners, the home page, anywhere with room.</span></div></div>
@@ -388,9 +385,8 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:1fr 3.2in;gap:.5in">
       <div>
-        <div class="eyebrow">Clear Space</div>
         <h1 style="margin-bottom:18pt">Give it room to breathe</h1>
-        <div style="position:relative;background:#fff;border:.6pt solid var(--rule);height:4.75in;display:flex;align-items:center;justify-content:center">
+        <div style="position:relative;background:#fff;height:4.75in;display:flex;align-items:center;justify-content:center">
           <div style="position:relative;padding:.42in;outline:1pt dashed var(--rose);background:repeating-linear-gradient(45deg,rgba(165,94,92,.07) 0 6px,transparent 6px 12px)">
             <div style="background:var(--parch);outline:.6pt solid var(--rule);padding:4pt 8pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/02-horizontal-burg.svg" style="display:block;width:3.6in"></div>
             <div style="position:absolute;left:.1in;top:.08in;font:600 9pt var(--sans);color:var(--rose)">X</div>
@@ -422,7 +418,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page">
   <div class="run"><span><b>02</b> · Logo</span><span>Colour Versions</span></div>
   <div class="inner">
-    <div class="eyebrow">Colour Versions</div>
     <h1 style="margin-bottom:18pt">Approved logo colourways</h1>
     <div class="grid g3" style="gap:14pt">
       <div><div style="background:var(--parch);border:.6pt solid var(--rule);height:1.8in;display:flex;align-items:center;justify-content:center"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/02-horizontal-burg.svg" style="display:block;width:78%"></div><h3 style="margin-top:8pt">Primary · Burgundy on Parchment</h3><p class="small">First choice for everything.</p></div>
@@ -440,17 +435,16 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page">
   <div class="run"><span><b>02</b> · Logo</span><span>Misuse</span></div>
   <div class="inner">
-    <div class="eyebrow">Please Don't</div>
     <h1 style="margin-bottom:18pt">Keep the logo intact</h1>
     <div class="grid g4" style="gap:14pt">
-      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:var(--parch);position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/02-horizontal-burg.svg" style="display:block;width:1.6in;transform:scale(1.25,.6)"></div><p class="dodont dont" style="margin-top:7pt">✕ Stretch or squash</p><p class="small">Always scale proportionally. Hold Shift.</p></div>
-      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:var(--parch);position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-blue.svg" style="display:block;height:1.2in"></div><p class="dodont dont" style="margin-top:7pt">✕ Recolour</p><p class="small">Use only the approved colourways.</p></div>
-      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:var(--parch);position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;height:1.15in;transform:rotate(-14deg)"></div><p class="dodont dont" style="margin-top:7pt">✕ Rotate or tilt</p><p class="small">The cross always stands upright.</p></div>
-      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:var(--parch);position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;height:1.15in;filter:drop-shadow(4px 5px 3px rgba(0,0,0,.55))"></div><p class="dodont dont" style="margin-top:7pt">✕ Add effects</p><p class="small">No shadows, glows, bevels or gradients.</p></div>
-      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:var(--parch);position:relative;overflow:hidden;gap:6pt"><div style="width:.95in;height:.62in;overflow:hidden"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;width:.95in"></div><span style="font:italic 700 18pt 'Brush Script MT',cursive;color:var(--burg)">Emmaus</span></div><p class="dodont dont" style="margin-top:7pt">✕ Retype the lettering</p><p class="small">The wordmark is artwork, not live text.</p></div>
+      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:#fff;position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/02-horizontal-burg.svg" style="display:block;width:1.6in;transform:scale(1.25,.6)"></div><p class="dodont dont" style="margin-top:7pt">✕ Stretch or squash</p><p class="small">Always scale proportionally. Hold Shift.</p></div>
+      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:#fff;position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-blue.svg" style="display:block;height:1.2in"></div><p class="dodont dont" style="margin-top:7pt">✕ Recolour</p><p class="small">Use only the approved colourways.</p></div>
+      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:#fff;position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;height:1.15in;transform:rotate(-14deg)"></div><p class="dodont dont" style="margin-top:7pt">✕ Rotate or tilt</p><p class="small">The cross always stands upright.</p></div>
+      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:#fff;position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;height:1.15in;filter:drop-shadow(4px 5px 3px rgba(0,0,0,.55))"></div><p class="dodont dont" style="margin-top:7pt">✕ Add effects</p><p class="small">No shadows, glows, bevels or gradients.</p></div>
+      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:#fff;position:relative;overflow:hidden;gap:6pt"><div style="width:.95in;height:.62in;overflow:hidden"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;width:.95in"></div><span style="font:italic 700 18pt 'Brush Script MT',cursive;color:var(--burg)">Emmaus</span></div><p class="dodont dont" style="margin-top:7pt">✕ Retype the lettering</p><p class="small">The wordmark is artwork, not live text.</p></div>
       <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:linear-gradient(120deg,#C98B5A,#6F7F8C 50%,#D8C3A0);position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-rose.svg" style="display:block;height:1.2in"></div><p class="dodont dont" style="margin-top:7pt">✕ Busy backgrounds</p><p class="small">Use flat brand colour or a calm, darkened image.</p></div>
-      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:var(--parch);position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/05-wordmark-burg.svg" style="display:block;width:1.05in"><div style="width:.62in;height:.4in;overflow:hidden"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;width:.62in"></div></div><p class="dodont dont" style="margin-top:7pt">✕ Rearrange the parts</p><p class="small">Use only the five supplied lockups.</p></div>
-      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:var(--parch);position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;height:1.15in"><span style="position:absolute;left:.95in;top:.8in;font:600 8pt var(--sans);background:var(--gold);color:#fff;padding:3pt 5pt;transform:rotate(-8deg)">Walk #47!</span></div><p class="dodont dont" style="margin-top:7pt">✕ Crowd or overlap</p><p class="small">Respect clear space. Nothing sits on the logo.</p></div>
+      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:#fff;position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/05-wordmark-burg.svg" style="display:block;width:1.05in"><div style="width:.62in;height:.4in;overflow:hidden"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;width:.62in"></div></div><p class="dodont dont" style="margin-top:7pt">✕ Rearrange the parts</p><p class="small">Use only the five supplied lockups.</p></div>
+      <div><div class="frame" style="height:1.55in;display:flex;align-items:center;justify-content:center;background:#fff;position:relative;overflow:hidden;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;height:1.15in"><span style="position:absolute;left:.95in;top:.8in;font:600 8pt var(--sans);background:var(--gold);color:#fff;padding:3pt 5pt;transform:rotate(-8deg)">Walk #47!</span></div><p class="dodont dont" style="margin-top:7pt">✕ Crowd or overlap</p><p class="small">Respect clear space. Nothing sits on the logo.</p></div>
     </div>
   </div>
   <div class="foot"><span>easterncarolinaemmaus.org</span><span class="pn"></span></div>
@@ -471,7 +465,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page">
   <div class="run"><span><b>03</b> · Colour</span><span>Core Palette</span></div>
   <div class="inner">
-    <div class="eyebrow">Core Palette</div>
     <h1 style="margin-bottom:6pt">Our colours</h1>
     <p class="lede" style="max-width:7.4in;margin-bottom:16pt">Two anchors carry the brand: <b style="color:var(--burg)">Emmaus Burgundy</b> and <b>Parchment</b>. The supporting tones give warmth and depth without adding noise.</p>
     <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:10pt">
@@ -492,7 +485,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:4.3in 1fr;gap:.5in">
       <div>
-        <div class="eyebrow">Accent Palette</div>
         <h2 style="margin-bottom:14pt">Accents, used with restraint</h2>
         <div class="grid g2" style="gap:10pt">
           <div class="sw"><div class="chip" style="background:var(--gold);height:.9in"><span style="color:#fff;font-size:12pt">Chalice Gold</span></div><div class="meta"><b>HEX</b>#B08A4E<br><b>RGB</b>176 · 138 · 78<br><b>CMYK</b>25 · 42 · 80 · 8</div><div class="role">Ornaments, rules, icons, foil. Never body text.</div></div>
@@ -503,7 +495,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
         </div>
       </div>
       <div>
-        <div class="eyebrow">Proportion</div>
         <h2 style="margin-bottom:14pt">How much of each</h2>
         <div style="display:flex;height:.9in;border:.6pt solid var(--rule)">
           <div style="flex:50;background:var(--parch)"></div><div style="flex:22;background:var(--burg)"></div><div style="flex:12;background:var(--linen)"></div><div style="flex:8;background:var(--ink)"></div><div style="flex:4;background:var(--rose)"></div><div style="flex:2.5;background:var(--gold)"></div><div style="flex:1.5;background:var(--olive)"></div>
@@ -512,7 +503,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
           <div style="flex:50">PARCHMENT 50%</div><div style="flex:22">BURGUNDY 22%</div><div style="flex:28;text-align:right">OTHER 28%</div>
         </div>
         <p style="margin-top:14pt">Pages should feel <b>light and calm</b>, with burgundy used in confident bands, never scattered. A typical web page alternates Parchment → Linen → a Burgundy band → Parchment, the rhythm used in the reference themes.</p>
-        <div class="eyebrow" style="margin-top:18pt">Tints</div>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4pt">
           <div style="height:.42in;background:#6B1F26"></div><div style="height:.42in;background:#8F4E53"></div><div style="height:.42in;background:#B38082"></div><div style="height:.42in;background:#D6B6B5"></div><div style="height:.42in;background:#EEE0DC"></div>
           <div style="height:.42in;background:#B08A4E"></div><div style="height:.42in;background:#C3A574"></div><div style="height:.42in;background:#D5C09B"></div><div style="height:.42in;background:#E6D9C2"></div><div style="height:.42in;background:#F3ECE0"></div>
@@ -530,7 +520,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:3in 1fr;gap:.5in">
       <div>
-        <div class="eyebrow">Accessibility</div>
         <h1 style="margin-bottom:14pt">Readable for every pilgrim</h1>
         <p>Many in our community read on phones, in bright sun or with older eyes. All text must meet <b>WCAG 2.1 AA</b> contrast: 4.5:1 for body text and 3:1 for large text (18pt+, or 14pt bold).</p>
         <div class="note" style="margin-top:14pt"><b>Watch Rosewood and Gold.</b> They are beautiful but light. Use Rosewood only for large or script text on Parchment, and keep Gold for ornaments.</div>
@@ -569,7 +558,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page">
   <div class="run"><span><b>04</b> · Typography</span><span>Typefaces</span></div>
   <div class="inner">
-    <div class="eyebrow">Type Family</div>
     <h1 style="margin-bottom:16pt">Four typefaces, four jobs</h1>
     <div class="grid g4" style="gap:12pt">
       <div class="card" style="padding:18pt 16pt"><div class="cap">Display</div><div style="font:400 80pt/1 var(--disp);color:var(--burg);margin:14pt 0">Aa</div><h4>Marcellus</h4><div class="cap" style="margin-bottom:5pt">Regular 400</div><p class="small">Headlines, page titles, pull-quotes, the “Emmaus” wordmark. Engraved Roman capitals with quiet flare: reverent without being stiff.</p><div class="rule"></div><div style="font:400 11pt/1.4 var(--disp)">ABCDEFGHIJKLM<br>abcdefghijklm<br>0123456789</div></div>
@@ -587,11 +575,10 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="run"><span><b>04</b> · Typography</span><span>Hierarchy</span></div>
   <div class="inner">
     <div class="split" style="grid-template-columns:1fr 2.9in;gap:.5in">
-      <div style="background:#fff;border:.6pt solid var(--rule);padding:26pt 30pt">
+      <div style="background:#fff;padding:26pt 30pt">
         <div style="display:grid;grid-template-columns:.9in 1fr;row-gap:19pt;align-items:baseline">
           <div class="cap">Script</div><div class="script" style="font-size:26pt">Welcome home</div>
           <div class="cap">H1</div><div style="font:400 38pt/1.05 var(--disp)">Attend a Walk</div>
-          <div class="cap">Eyebrow</div><div style="font:600 8pt var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--burg)">Upcoming · Men's Walk #47</div>
           <div class="cap">H2</div><div style="font:400 24pt/1.1 var(--disp)">Three days, briefly</div>
           <div class="cap">H3</div><div style="font:600 10pt var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--burg)">What to bring</div>
           <div class="cap">Lead</div><div style="font:400 15pt/1.4 var(--serif)">The Walk to Emmaus is a three-day experience for Christian adults.</div>
@@ -601,14 +588,12 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
         </div>
       </div>
       <div>
-        <div class="eyebrow">Type Scale</div>
         <h2 style="margin-bottom:12pt">Sizes that work together</h2>
         <table>
           <tr><th>Style</th><th>Web</th><th>Print</th></tr>
           <tr><td class="k">H1 Marcellus</td><td>48–56 px</td><td>36–48 pt</td></tr>
           <tr><td class="k">H2 Marcellus</td><td>32 px</td><td>22–26 pt</td></tr>
           <tr><td class="k">H3 Montserrat 600</td><td>14 px, +16%</td><td>9–10 pt</td></tr>
-          <tr><td class="k">Eyebrow 600</td><td>12 px, +26%</td><td>7.5–8 pt</td></tr>
           <tr><td class="k">Lead Crimson</td><td>21 px</td><td>14–15 pt</td></tr>
           <tr><td class="k">Body Crimson</td><td>18 px / 1.55</td><td>11–12 pt / 1.45</td></tr>
           <tr><td class="k">Caption Montserrat</td><td>13 px</td><td>7–8 pt</td></tr>
@@ -641,7 +626,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:2.9in 1fr;gap:.45in">
       <div>
-        <div class="eyebrow">Photography</div>
         <h1 style="margin-bottom:12pt">Sanctuary light, real people</h1>
         <p>Our photographs feel like being there: warm natural light, candle glow, stone and wood, hands and faces in genuine moments. Close crops and shallow depth of field keep attention on what matters.</p>
         <h3 style="margin-top:14pt">Look for</h3>
@@ -696,7 +680,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page">
   <div class="run"><span><b>05</b> · Imagery</span><span>Photo Treatment</span></div>
   <div class="inner">
-    <div class="eyebrow">Colour Treatment</div>
     <h1 style="margin-bottom:14pt">One warm, consistent grade</h1>
     <div class="grid g3" style="gap:12pt">
       <div><div style="height:2.25in;overflow:hidden"><svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;filter:saturate(1.25) hue-rotate(-12deg) brightness(1.05)"><rect width="300" height="160" fill="url(#dawn)"/><circle cx="150" cy="88" r="55" fill="url(#sunG)"/><path d="M0 98 C70 86 130 92 170 96 C220 102 260 90 300 94 V160 H0Z" fill="#6B3A3A"/><path d="M80 160 C120 130 140 110 148 96 L154 96 C164 116 190 140 230 160Z" fill="#C9A487"/></svg></div><h3 style="margin-top:8pt">1 · Natural</h3><p class="small">Straight from camera. Fine for news and event recaps.</p></div>
@@ -717,7 +700,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:2.8in 1fr;gap:.45in">
       <div>
-        <div class="eyebrow">Illustration</div>
         <h1 style="margin-bottom:12pt">Engraved line art</h1>
         <p>Like the chalice and the Madonna engravings in our reference themes, ECE illustrations are fine line drawings with hatched shading, the look of an old Bible plate. They add warmth where we have no photograph, and sit behind content as quiet watermarks.</p>
         <ul class="dots" style="margin-top:12pt">
@@ -745,7 +727,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="grid" style="grid-template-columns:1fr 1fr;gap:.45in">
       <div>
-        <div class="eyebrow">Iconography</div>
         <h2 style="margin-bottom:10pt">Simple line icons</h2>
         <p class="small" style="margin-bottom:12pt">1.5 px stroke on a 24 px grid, rounded ends, no fills. Burgundy on light, Parchment on dark. Always paired with a label.</p>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8pt;text-align:center">
@@ -767,7 +748,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
         </div>
       </div>
       <div>
-        <div class="eyebrow">Graphic Elements</div>
         <h2 style="margin-bottom:12pt">Ornaments &amp; devices</h2>
         <div style="display:grid;grid-template-columns:1.3in 1fr;gap:12pt;align-items:center">
           <div style="height:.78in;background:var(--burg);position:relative;overflow:hidden"><svg style="position:absolute;left:0;right:0;width:100%;bottom:-1px;height:12px;color:var(--parch)"><use href="#torn"/></svg></div>
@@ -776,8 +756,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
           <div><h3 style="margin:0">Framed card</h3><p class="small">A hairline Blush frame on burgundy for the “Ways in” cards (Attend, BTS, Sponsor, Give).</p></div>
           <div style="height:.78in;display:flex;align-items:center;justify-content:center;gap:6pt"><div style="width:.4in;border-top:.8pt solid var(--gold)"></div><div style="width:5pt;height:5pt;background:var(--gold);transform:rotate(45deg)"></div><div style="width:.4in;border-top:.8pt solid var(--gold)"></div></div>
           <div><h3 style="margin:0">Gold diamond rule</h3><p class="small">Divides sections of letters, programs and certificates.</p></div>
-          <div style="height:.78in;display:flex;align-items:center;justify-content:center"><div style="font:600 7pt var(--sans);letter-spacing:.26em;color:var(--burg);display:flex;align-items:center;gap:6pt"><span style="width:18pt;border-top:1pt solid var(--burg)"></span>ABOUT US</div></div>
-          <div><h3 style="margin:0">Eyebrow with dash</h3><p class="small">Labels every section heading, as in the Eden reference.</p></div>
           <div style="height:.78in;display:flex;align-items:center;justify-content:center;font:italic 400 13pt var(--serif);color:var(--burg)">“ De Colores ”</div>
           <div><h3 style="margin:0">Pull-quote</h3><p class="small">Crimson italic, centred, with the reference in a small cap label.</p></div>
         </div>
@@ -799,7 +777,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page">
   <div class="run"><span><b>06</b> · Voice</span><span>Tone of Voice</span></div>
   <div class="inner">
-    <div class="eyebrow">Tone of Voice</div>
     <h1 style="margin-bottom:16pt">Four voice principles</h1>
     <div class="grid g4" style="gap:14pt;margin-bottom:18pt">
       <div><h4>Invitational</h4><p class="small">We invite and never pressure. “You're welcome to…” rather than “You must…”.</p></div>
@@ -829,7 +806,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="grid" style="grid-template-columns:1.15fr 1fr;gap:.45in">
       <div>
-        <div class="eyebrow">Our Own Words</div>
         <h2 style="margin-bottom:10pt">Community vocabulary</h2>
         <table>
           <tr><td class="k">Eastern Carolina Emmaus</td><td>Full name at first mention; <b>ECE</b> after that.</td></tr>
@@ -845,7 +821,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
         </table>
       </div>
       <div>
-        <div class="eyebrow">Mechanics</div>
         <h2 style="margin-bottom:10pt">Writing style</h2>
         <table>
           <tr><td class="k">Dates</td><td>Thursday, October 22, 2026 · short form: Thu, Oct 22</td></tr>
@@ -869,7 +844,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page dark divider">
   <div class="num">07</div>
   <svg style="position:absolute;right:.9in;top:1.1in;width:2.8in;color:var(--blush);opacity:.55"><use href="#chalice"/></svg>
-  <div class="ttl"><span class="script">bringing it to life</span><h1>Applications</h1><p>How the identity comes together on the website, in print, in inboxes, on Facebook and across the walk weekend.</p></div>
+  <div class="ttl"><span class="script">bringing it to life</span><h1>Applications</h1><p>How the identity comes together on the website, in print and in the inbox.</p></div>
   <div class="foot"><span>Eastern Carolina Emmaus</span><span class="pn">29</span></div>
 </section>
 
@@ -891,7 +866,7 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
         <svg style="position:absolute;left:0;width:100%;bottom:-1px;height:8px;color:var(--parch)"><use href="#torn"/></svg>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:12pt;padding:12pt 20pt;align-items:center;position:relative">
-        <div><div class="eyebrow" style="font-size:4.6pt;margin-bottom:4pt">About us</div><div style="font:400 14pt/1.1 var(--disp)">Three days, briefly</div><p style="font-size:6.4pt;line-height:1.45;margin-top:4pt">Thursday evening send-off. Saturday night candlelight. Sunday afternoon closing: family and sponsors welcome.</p></div>
+        <div><div style="font:400 14pt/1.1 var(--disp)">Three days, briefly</div><p style="font-size:6.4pt;line-height:1.45;margin-top:4pt">Thursday evening send-off. Saturday night candlelight. Sunday afternoon closing: family and sponsors welcome.</p></div>
         <svg style="width:1.3in;height:.75in;color:var(--sepia);opacity:.6;justify-self:end"><use href="#road"/></svg>
       </div>
       <div style="background:var(--burg);padding:12pt 20pt 14pt">
@@ -903,14 +878,13 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
         </div>
       </div>
       <div style="flex:1;padding:18pt 20pt;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14pt;align-items:center">
-        <div><div class="eyebrow" style="font-size:4.6pt;margin-bottom:4pt">Fourth Day</div><div style="font:400 14pt/1.1 var(--disp)">From the newsletter</div></div>
-        <div style="border-top:.6pt solid var(--rule);padding-top:8pt"><svg style="width:12pt;height:12pt;color:var(--burg);margin-bottom:4pt"><use href="#i-book"/></svg><div style="font:400 10pt var(--disp)">[Month] newsletter</div><p style="font-size:7pt;line-height:1.45;margin-top:3pt">Walk reports, upcoming dates and prayer requests.</p></div>
-        <div style="border-top:.6pt solid var(--rule);padding-top:8pt"><svg style="width:12pt;height:12pt;color:var(--burg);margin-bottom:4pt"><use href="#i-book"/></svg><div style="font:400 10pt var(--disp)">Community needs</div><p style="font-size:7pt;line-height:1.45;margin-top:3pt">Current needs and the ECE wish list.</p></div>
+        <div><div style="font:400 14pt/1.1 var(--disp)">From the newsletter</div></div>
+        <div style="padding-top:8pt"><svg style="width:12pt;height:12pt;color:var(--burg);margin-bottom:4pt"><use href="#i-book"/></svg><div style="font:400 10pt var(--disp)">[Month] newsletter</div><p style="font-size:7pt;line-height:1.45;margin-top:3pt">Walk reports, upcoming dates and prayer requests.</p></div>
+        <div style="padding-top:8pt"><svg style="width:12pt;height:12pt;color:var(--burg);margin-bottom:4pt"><use href="#i-book"/></svg><div style="font:400 10pt var(--disp)">Community needs</div><p style="font-size:7pt;line-height:1.45;margin-top:3pt">Current needs and the ECE wish list.</p></div>
       </div>
       <div style="background:var(--wine);padding:6pt 20pt;display:flex;justify-content:space-between;align-items:center;font:500 4.6pt var(--sans);letter-spacing:.14em;color:var(--blush)"><span>© EASTERN CAROLINA EMMAUS · A 501(C)(3) NON-PROFIT</span><span style="display:flex;align-items:center;gap:3pt"><svg style="width:8pt;height:8pt;color:var(--parch)"><use href="#i-fb"/></svg>FOLLOW US ON FACEBOOK</span></div>
     </div>
     <div>
-      <div class="eyebrow">Website</div>
       <h2 style="margin-bottom:10pt">The home page</h2>
       <ul class="dots">
         <li>Parchment header, logo left, calm navigation with <b>Attend a Walk</b> and <b>Behind the Scenes</b></li>
@@ -929,7 +903,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
 <section class="page">
   <div class="run"><span><b>07</b> · Applications</span><span>Website · Components</span></div>
   <div class="inner">
-    <div class="eyebrow">UI Components</div>
     <h1 style="margin-bottom:16pt">Buttons, cards &amp; forms</h1>
     <div class="grid" style="grid-template-columns:1fr 1.15fr 1fr;gap:.35in">
       <div>
@@ -981,7 +954,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="run"><span><b>07</b> · Applications</span><span>Stationery</span></div>
   <div class="inner" style="display:grid;grid-template-columns:3.2in 1fr;gap:.45in">
     <div>
-      <div class="eyebrow">Business Cards</div>
       <div style="width:3.2in;height:1.83in;background:var(--parch);box-shadow:0 5px 14px rgba(43,35,37,.18);padding:14pt 16pt;position:relative;border:.4pt solid var(--rule)">
         <div style="display:flex;align-items:center;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/02-horizontal-burg.svg" style="display:block;height:46pt"></div>
         <div style="position:absolute;left:16pt;bottom:13pt"><div style="font:400 12pt var(--disp)">Jane Smith</div><div style="font:600 5.4pt var(--sans);letter-spacing:.2em;color:var(--burg);margin:2pt 0 5pt">COMMUNITY LAY DIRECTOR · WALK #31</div><div style="font:400 7pt/1.5 var(--serif)">jsmith@easterncarolinaemmaus.org<br>(919) 555-0100 · easterncarolinaemmaus.org</div></div>
@@ -995,7 +967,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
       <p class="small" style="margin-top:8pt">3.5 × 2 in, 16 pt uncoated cream stock. Optional gold foil on the mark.</p>
     </div>
     <div>
-      <div class="eyebrow">Letterhead</div>
       <div style="display:flex;gap:18pt">
         <div style="width:3.4in;height:4.4in;background:#FBF8F3;box-shadow:0 5px 14px rgba(43,35,37,.16);padding:22pt 24pt;position:relative;border:.4pt solid var(--rule)">
           <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;align-items:center;gap:5pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/02-horizontal-burg.svg" style="display:block;height:42pt"></div><div style="font:500 4.4pt/1.6 var(--sans);letter-spacing:.12em;text-align:right;color:var(--sepia)">[MAILING ADDRESS]<br>EASTERNCAROLINAEMMAUS.ORG</div></div>
@@ -1027,7 +998,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
   <div class="inner">
     <div class="split" style="grid-template-columns:1fr 3.6in;gap:.5in">
       <div>
-        <div class="eyebrow">Email</div>
         <h1 style="margin-bottom:12pt">Mailboxes &amp; signatures</h1>
         <p>Every board member uses a mailbox on our own domain. This looks trustworthy to pilgrims and donors, and it stays with the role, not a personal account.</p>
         <table style="margin-top:14pt">
@@ -1069,85 +1039,6 @@ td.k{font:600 8pt/1.35 var(--sans);color:var(--burg);letter-spacing:.04em;white-
     </div>
   </div>
   <div class="foot"><span>easterncarolinaemmaus.org</span><span class="pn">33</span></div>
-</section>
-
-<!-- ============ 34. SOCIAL ============ -->
-<section class="page">
-  <div class="run"><span><b>07</b> · Applications</span><span>Facebook &amp; Social</span></div>
-  <div class="inner">
-    <div class="eyebrow">Facebook &amp; Social</div>
-    <h1 style="margin-bottom:14pt">Three post templates</h1>
-    <div class="grid g3" style="gap:.3in">
-      <div><div style="width:2.8in;height:2.8in;background:var(--burg);position:relative;overflow:hidden;color:var(--parch);padding:22pt">
-        <svg style="position:absolute;right:-36pt;bottom:-24pt;width:3.1in;color:var(--blush);opacity:.3"><use href="#road"/></svg>
-        <div style="font:600 7pt var(--sans);letter-spacing:.26em;color:var(--blush)">NOW OPEN</div>
-        <div style="font:400 27pt/1.05 var(--disp);margin-top:8pt">Women's<br>Walk #48</div>
-        <div style="font:400 12pt var(--serif);color:var(--blush);margin-top:8pt">November 5–8, 2026</div>
-        <div style="position:absolute;left:22pt;bottom:20pt;display:flex;align-items:center;gap:6pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/03-horizontal-one-line-parch.svg" style="display:block;height:30pt"></div>
-      </div><h3 style="margin-top:9pt">Walk announcement</h3><p class="small">Burgundy ground, Marcellus title, engraving watermark.</p></div>
-      <div><div style="width:2.8in;height:2.8in;background:var(--parch);border:.6pt solid var(--rule);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14pt 24pt 52pt;text-align:center">
-        <div style="display:flex;align-items:center;gap:4pt;margin-bottom:12pt"><div style="width:26pt;border-top:.6pt solid var(--gold)"></div><div style="width:4pt;height:4pt;background:var(--gold);transform:rotate(45deg)"></div><div style="width:26pt;border-top:.6pt solid var(--gold)"></div></div>
-        <div style="font:italic 400 15pt/1.35 var(--serif);color:var(--ink)">“Trust in the Lord with all your heart, and do not lean on your own understanding.”</div>
-        <div style="font:600 6.4pt var(--sans);letter-spacing:.24em;color:var(--burg);margin-top:12pt">PROVERBS 3:5</div>
-        <div style="position:absolute;bottom:10pt"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-burg.svg" style="display:block;height:34pt"></div>
-      </div><h3 style="margin-top:9pt">Scripture card</h3><p class="small">Parchment ground, Crimson italic, gold diamond rule.</p></div>
-      <div><div style="width:2.8in;height:2.8in;background:var(--olive);position:relative;overflow:hidden;color:var(--parch);padding:22pt">
-        <svg style="position:absolute;right:14pt;bottom:12pt;width:.8in;height:1.3in;color:var(--parch);opacity:.3"><use href="#candle"/></svg>
-        <span class="script" style="font-size:22pt;color:#E3CFA0;display:block">hold them in prayer</span>
-        <div style="font:400 24pt/1.05 var(--disp);margin-top:4pt">Prayer Vigil<br>Walk #47</div>
-        <div style="font:400 10.5pt/1.4 var(--serif);margin-top:8pt;color:#E4E1D6">30-minute slots<br>Thu 6:00 PM – Sun 4:00 PM</div>
-        <div style="position:absolute;left:22pt;bottom:20pt"><span class="btn r" style="font-size:6pt;padding:6pt 10pt;color:var(--olive)">Choose a slot</span></div>
-      </div><h3 style="margin-top:9pt">Prayer vigil</h3><p class="small">Vine Olive ground for prayer and Fourth Day posts.</p></div>
-    </div>
-    <div class="rule" style="margin:14pt 0 10pt"></div>
-    <div class="grid g4" style="gap:16pt">
-      <div><h3>Profile &amp; cover</h3><p class="small">Profile: the Compact logo in Parchment on Burgundy. Cover: 1640 × 624 px road illustration.</p></div>
-      <div><h3>Format</h3><p class="small">Square posts at 1080 × 1080 px. One message per post, with the link in the caption.</p></div>
-      <div><h3>Logo</h3><p class="small">Keep it small at the bottom left. Never centre it large.</p></div>
-      <div><h3>Note</h3><p class="small">Vigil times follow the working assumption (closing Sunday 4:00 PM) and still need confirming.</p></div>
-    </div>
-  </div>
-  <div class="foot"><span>easterncarolinaemmaus.org</span><span class="pn">34</span></div>
-</section>
-
-<!-- ============ 35. WALK WEEKEND ============ -->
-<section class="page">
-  <div class="run"><span><b>07</b> · Applications</span><span>Walk Weekend Materials</span></div>
-  <div class="inner" style="display:grid;grid-template-columns:2.6in 2in 1fr;gap:.45in;align-items:start">
-    <div>
-      <div class="eyebrow">Name Tag</div>
-      <div style="width:2.6in;height:3.7in;background:var(--parch);box-shadow:0 5px 14px rgba(43,35,37,.16);border:.4pt solid var(--rule);text-align:center;position:relative;overflow:hidden">
-        <div style="background:var(--burg);height:1.25in;display:flex;align-items:center;justify-content:center"><img alt="Eastern Carolina Emmaus logo" src="assets/logo/04-compact-emmaus-parch.svg" style="display:block;height:1.05in"></div>
-        <div style="font:400 32pt var(--disp);margin-top:26pt">Michael</div>
-        <div style="font:400 11pt var(--serif);color:var(--sepia)">Greenville</div>
-        <div style="width:30pt;border-top:.6pt solid var(--gold);margin:10pt auto"></div>
-        <div style="font:600 6.4pt var(--sans);letter-spacing:.24em;color:var(--burg)">MEN'S WALK #47</div>
-        <svg class="torn" style="bottom:-1px;height:10px;color:var(--burg)"><use href="#torn"/></svg>
-      </div>
-      <p class="small" style="margin-top:8pt">3 × 4 in badge. First name large in Marcellus, hometown in Crimson, walk number as a tracked label.</p>
-    </div>
-    <div>
-      <div class="eyebrow">Banner</div>
-      <div style="width:2in;height:4.85in;background:var(--burg);box-shadow:0 5px 14px rgba(43,35,37,.18);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding-top:26pt">
-        <img alt="Eastern Carolina Emmaus logo" src="assets/logo/01-primary-stacked-parch.svg" style="display:block;width:1.65in">
-        <span class="script" style="font-size:20pt;color:var(--gold);margin-top:16pt">De Colores</span>
-        <div style="font:400 10pt/1.3 var(--disp);color:var(--blush);text-align:center;margin-top:8pt;padding:0 12pt">The road is easier walked together.</div>
-        <svg style="position:absolute;bottom:-4pt;width:2.4in;color:var(--blush);opacity:.4"><use href="#road"/></svg>
-      </div>
-    </div>
-    <div style="padding-top:.2in">
-      <div class="eyebrow">On the Weekend</div>
-      <h2 style="margin-bottom:12pt">Print that feels like the brand</h2>
-      <ul class="dots">
-        <li>Pull-up banner 33 × 80 in. Keep the logo in the top third, where it can be seen above tables.</li>
-        <li>Name tags, table cards and programs on cream or Parchment stock, never bright white.</li>
-        <li>Burgundy headers, Marcellus names, one script flourish at most.</li>
-        <li>Rosters and schedules print straight from the website in the house type styles.</li>
-      </ul>
-      <div class="note" style="margin-top:14pt"><b>Keep the surprises.</b> Printed pieces pilgrims see before or during the walk must never give away what happens next.</div>
-    </div>
-  </div>
-  <div class="foot"><span>easterncarolinaemmaus.org</span><span class="pn"></span></div>
 </section>
 
 <!-- ============ 37. BACK COVER ============ -->
