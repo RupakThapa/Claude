@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Construction Site Scene</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #e6e9ec; }
+  canvas { display: block; }
+  #hint {
+    position: fixed; left: 16px; bottom: 12px;
+    font: 12px/1.4 system-ui, -apple-system, sans-serif; color: #7a828c;
+    user-select: none; pointer-events: none;
+  }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="hint">Drag to orbit &middot; scroll to zoom &middot; right-drag to pan</div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+/* ------------------------------------------------------------------ */
+/* Renderer, scene, camera                                             */
+/* ------------------------------------------------------------------ */
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xe8ebee);
+scene.fog = new THREE.Fog(0xe8ebee, 22, 55);
+
+const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(0.05, 1.75, 4.6);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0.05, 0.82, 0.1); // on the same view ray, pivoting around the worker
+controls.enableDamping = true;
+controls.maxPolarAngle = Math.PI * 0.495;
+controls.minDistance = 2.5;
+controls.maxDistance = 30;
+controls.update();
+
+/* ------------------------------------------------------------------ */
+/* Helpers                                                             */
+/* ------------------------------------------------------------------ */
+function rng(seed) { // mulberry32
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const rand = rng(7);
+const rr = (a, b) => a + (b - a) * rand();
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const UP = V(0, 1, 0);
+
+function box(w, h, d, mat, x, y, z, parent = scene, radius = 0) {
+  const geo = radius > 0 ? new RoundedBoxGeometry(w, h, d, 2, radius) : new THREE.BoxGeometry(w, h, d);
+  const m = new THREE.Mesh(geo, mat);
+  m.position.set(x, y, z);
+  parent.add(m);
+  return m;
+}
+
+// Tapered tube between two points, with ball joints at each end
+function limb(a, b, r1, r2, mat, parent, caps = true) {
+  const dir = new THREE.Vector3().subVectors(b, a);
+  const len = dir.length();
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r2, r1, len, 24, 1, true), mat);
+  m.position.copy(a).addScaledVector(dir, 0.5);
+  m.quaternion.setFromUnitVectors(UP, dir.normalize());
+  parent.add(m);
+  if (caps) {
+    const s1 = new THREE.Mesh(new THREE.SphereGeometry(r1, 24, 16), mat);
+    s1.position.copy(a); parent.add(s1);
+    const s2 = new THREE.Mesh(new THREE.SphereGeometry(r2, 24, 16), mat);
+    s2.position.copy(b); parent.add(s2);
+  }
+  return m;
+}
+
+function canvasTexture(w, h, draw, repeat) {
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  if (repeat) {
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(repeat[0], repeat[1]);
+  }
+  return t;
+}
+
+/* ------------------------------------------------------------------ */
+/* Materials – "clay render" look                                      */
+/* ------------------------------------------------------------------ */
+const clay      = new THREE.MeshStandardMaterial({ color: 0xf1f2f4, roughness: 0.9 });
+const clayWall  = new THREE.MeshStandardMaterial({ color: 0xeceef1, roughness: 0.95 });
+const clayDark  = new THREE.MeshStandardMaterial({ color: 0xd9dde2, roughness: 0.95 });
+const skin      = new THREE.MeshStandardMaterial({ color: 0xf0f1f3, roughness: 0.75 });
+const helmetMat = new THREE.MeshStandardMaterial({ color: 0xf6f7f8, roughness: 0.35 });
+const timber    = new THREE.MeshStandardMaterial({ color: 0xf0f0ee, roughness: 0.9 });
+const strapMat  = new THREE.MeshStandardMaterial({ color: 0xe9eaec, roughness: 0.6 });
+const rebarMat  = new THREE.MeshStandardMaterial({ color: 0x9fa5ad, roughness: 0.6, metalness: 0.15 });
+const steelMat  = new THREE.MeshStandardMaterial({ color: 0xdfe2e6, roughness: 0.45, metalness: 0.25 });
+const jointMat  = new THREE.MeshStandardMaterial({ color: 0xc4c9cf, roughness: 1 });
+const glassMat  = new THREE.MeshStandardMaterial({ color: 0xc9d1d9, roughness: 0.15, metalness: 0.4 });
+
+/* ------------------------------------------------------------------ */
+/* Lighting                                                            */
+/* ------------------------------------------------------------------ */
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd2d6dc, 1.55));
+
+const sun = new THREE.DirectionalLight(0xfffbf4, 2.4);
+sun.position.set(8.0, 5.0, 5.2);
+sun.target.position.set(0, 0, -3);
+sun.castShadow = true;
+sun.shadow.mapSize.set(4096, 4096);
+Object.assign(sun.shadow.camera, { left: -14, right: 14, top: 14, bottom: -14, near: 0.5, far: 40 });
+sun.shadow.bias = -0.0003;
+sun.shadow.normalBias = 0.02;
+scene.add(sun, sun.target);
+
+/* ------------------------------------------------------------------ */
+/* Ground: concrete slab with joints and a recessed grate              */
+/* ------------------------------------------------------------------ */
+const concreteTex = canvasTexture(512, 512, (g, w, h) => {
+  g.fillStyle = '#eceef0'; g.fillRect(0, 0, w, h);
+  const r = rng(3);
+  for (let i = 0; i < 9000; i++) {
+    const v = 225 + r() * 25 | 0;
+    g.fillStyle = `rgba(${v},${v + 2},${v + 4},0.35)`;
+    g.fillRect(r() * w, r() * h, 1 + r() * 2, 1 + r() * 2);
+  }
+}, [14, 14]);
+
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(80, 80),
+  new THREE.MeshStandardMaterial({ color: 0xffffff, map: concreteTex, roughness: 0.95 })
+);
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
+
+function floorJoint(x1, z1, x2, z2) {
+  const dx = x2 - x1, dz = z2 - z1;
+  const m = box(Math.hypot(dx, dz), 0.004, 0.022, jointMat, (x1 + x2) / 2, 0.002, (z1 + z2) / 2);
+  m.rotation.y = -Math.atan2(dz, dx);
+}
+floorJoint(-2.88, -1.1, -0.9, 9);      // from the pillar toward the camera
+floorJoint(-12, -1.1, -3.72, -1.1);    // along the pillar face
+floorJoint(-2.4, -3.1, 1.6, 6);        // diagonal to the front right
+floorJoint(-0.5, -3.0, 9, -3.0);       // in front of the rebar heap
+floorJoint(-12, 3.6, 3.0, 3.1);        // front cross joint
+
+// everything from here to the timber stack sits in the back of the yard
+const backStart = scene.children.length;
+
+// recessed steel grate pad
+const grateTex = canvasTexture(256, 256, (g, w, h) => {
+  g.fillStyle = '#d3d7dc'; g.fillRect(0, 0, w, h);
+  g.strokeStyle = '#b7bcc3'; g.lineWidth = 2;
+  for (let i = 0; i <= w; i += 16) {
+    g.beginPath(); g.moveTo(i, 0); g.lineTo(i, h); g.stroke();
+    g.beginPath(); g.moveTo(0, i); g.lineTo(w, i); g.stroke();
+  }
+}, [10, 17]);
+const grate = new THREE.Mesh(new THREE.PlaneGeometry(2.9, 4.9),
+  new THREE.MeshStandardMaterial({ map: grateTex, roughness: 0.7, metalness: 0.15 }));
+grate.rotation.x = -Math.PI / 2;
+grate.position.set(-2.1, 0.006, -1.95);
+scene.add(grate);
+{
+  const lip = clayDark;
+  box(3.02, 0.02, 0.06, lip, -2.1, 0.01, 0.53);
+  box(3.02, 0.02, 0.06, lip, -2.1, 0.01, -4.43);
+  box(0.06, 0.02, 5.02, lip, -3.58, 0.01, -1.95);
+  box(0.06, 0.02, 5.02, lip, -0.62, 0.01, -1.95);
+}
+
+/* ------------------------------------------------------------------ */
+/* Architecture: precast panel walls, pilasters, columns, building     */
+/* ------------------------------------------------------------------ */
+function panelWall(x0, x1, z, height, panelH) {
+  const n = Math.round(height / panelH);
+  const w = x1 - x0;
+  for (let i = 0; i < n; i++) {
+    box(w, panelH - 0.025, 0.28, clayWall, (x0 + x1) / 2, i * panelH + panelH / 2, z, scene, 0.012);
+  }
+}
+const WALL_Z = -4.75;
+panelWall(-8.0, 1.3, WALL_Z, 3.4, 0.85);      // left, taller section
+panelWall(1.8, 5.6, WALL_Z, 3.0, 0.75);       // right section
+box(0.55, 3.8, 0.55, clayWall, 1.55, 1.9, WALL_Z + 0.05, scene, 0.02); // pilaster
+box(0.35, 3.1, 0.45, clayWall, 5.75, 1.55, WALL_Z, scene, 0.02);         // wall end
+
+// massive block on the right
+box(2.4, 12, 2.6, clay, 7.1, 6, -4.3, scene, 0.02).userData.noShadow = true;
+
+// building behind the walls: floor slab, columns and a band of windows
+{
+  const bz = -7.5;
+  box(22, 3.3, 0.4, clayDark, 0, 1.65, bz);             // lower facade (hidden behind wall)
+  box(22, 0.35, 3.0, clay, 0, 3.55, bz - 1.2);            // slab edge
+  box(22, 0.35, 3.0, clay, 0, 6.7, bz - 1.2);
+  box(22, 3.0, 0.2, clayDark, 0, 5.2, bz - 2.6);           // back wall
+  for (let x = -10; x <= 10; x += 2.6) {
+    box(0.35, 2.8, 0.35, clay, x, 5.1, bz - 0.1);         // columns
+    // glazing between columns
+    const gw = 2.2;
+    const glass = new THREE.Mesh(new THREE.PlaneGeometry(gw, 2.4), glassMat);
+    glass.position.set(x + 1.3, 5.0, bz - 0.25);
+    scene.add(glass);
+    box(gw, 0.08, 0.1, steelMat, x + 1.3, 3.8, bz - 0.2);
+    box(gw, 0.08, 0.1, steelMat, x + 1.3, 6.2, bz - 0.2);
+    box(gw, 0.05, 0.08, steelMat, x + 1.3, 4.6, bz - 0.2);
+    box(0.06, 2.4, 0.1, steelMat, x + 0.75, 5.0, bz - 0.2);
+    box(0.06, 2.4, 0.1, steelMat, x + 1.85, 5.0, bz - 0.2);
+  }
+  // parapet with rebar starter bars
+  box(22, 0.5, 0.3, clay, 0, 7.12, bz + 0.2);
+  for (let x = -10; x <= 10; x += 0.4) {
+    limb(V(x, 7.3, bz + 0.2), V(x, 7.9, bz + 0.2), 0.012, 0.012, rebarMat, scene, false);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Rebar mesh pile (instanced bars)                                    */
+/* ------------------------------------------------------------------ */
+const bars = [];
+function bar(a, b, r = 0.0068) { bars.push({ a, b, r }); }
+
+// welded mesh panel lying in its local XZ plane: x ∈ [-w/2, w/2], z ∈ [0, d]
+function meshPanel(matrix, w, d, step = 0.15) {
+  for (let x = -w / 2; x <= w / 2 + 1e-4; x += step)
+    bar(V(x, 0, -0.05).applyMatrix4(matrix), V(x, 0, d + 0.05).applyMatrix4(matrix));
+  for (let z = 0; z <= d + 1e-4; z += step)
+    bar(V(-w / 2 - 0.05, 0.015, z).applyMatrix4(matrix), V(w / 2 + 0.05, 0.015, z).applyMatrix4(matrix));
+}
+function placement(x, y, z, rx, ry, rz) {
+  return new THREE.Matrix4().compose(V(x, y, z),
+    new THREE.Quaternion().setFromEuler(new THREE.Euler(rx, ry, rz, 'YXZ')), V(1, 1, 1));
+}
+
+// flat stack spread over the back of the yard
+for (let i = 0; i < 10; i++) {
+  meshPanel(placement(0.1 + rr(-0.5, 0.5), 0.02 + i * 0.045, -4.45 + rr(0, 0.5),
+    rr(-0.08, 0.08), rr(-0.15, 0.15), rr(-0.02, 0.02)), 3.2, 2.2);
+}
+// panels leaning back against the wall
+for (let i = 0; i < 5; i++) {
+  meshPanel(placement(-1.3 + i * 0.6 + rr(-0.15, 0.15), 0.02, -3.95 - i * 0.05,
+    -(Math.PI / 2 + rr(0.8, 1.1)), rr(-0.15, 0.15), 0), 2.2, 1.1);
+}
+// a few slumped or sliding off the front of the pile
+meshPanel(placement(-0.6, 0.3, -2.55, 0.22, 0.3, 0.05), 2.0, 1.2);
+meshPanel(placement(0.9, 0.34, -2.45, 0.25, -0.25, -0.04), 2.2, 1.3);
+meshPanel(placement(0.2, 0.02, -2.0, 0.02, 0.1, 0.0), 2.4, 1.1);
+
+{
+  const geo = new THREE.CylinderGeometry(1, 1, 1, 6);
+  const inst = new THREE.InstancedMesh(geo, rebarMat, bars.length);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), d = new THREE.Vector3();
+  bars.forEach(({ a, b, r }, i) => {
+    d.subVectors(b, a);
+    const len = d.length();
+    q.setFromUnitVectors(UP, d.normalize());
+    m.compose(a.clone().lerp(b, 0.5), q, V(r, len, r));
+    inst.setMatrixAt(i, m);
+  });
+  scene.add(inst);
+}
+// loose bent bars in front of the pile
+for (let i = 0; i < 7; i++) {
+  const x = rr(-1.4, 1.6), z = rr(-2.0, -1.2);
+  const pts = [V(x, 0.01, z), V(x + rr(-0.2, 0.2), rr(0.3, 0.75), z + rr(-0.2, 0.1)),
+    V(x + rr(0.2, 0.6), rr(0.25, 0.65), z + rr(-0.3, 0)), V(x + rr(0.5, 1.0), 0.01, z + rr(-0.4, 0))];
+  const tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, 0.008, 5), rebarMat);
+  scene.add(tube);
+}
+
+/* ------------------------------------------------------------------ */
+/* Scaffolding tube pile (back right)                                  */
+/* ------------------------------------------------------------------ */
+{
+  const cx = 4.4, cz = -4.1;
+  for (let i = 0; i < 16; i++) {
+    const a = rr(-0.5, 0.5) + (i % 2 ? Math.PI / 2 : 0);
+    const len = rr(1.0, 2.0);
+    const y = 0.03 + rr(0, 0.3);
+    const c = V(cx + rr(-0.6, 0.6), y, cz + rr(-0.35, 0.3));
+    const dir = V(Math.cos(a), rr(-0.25, 0.25), Math.sin(a) * 0.45).normalize().multiplyScalar(len / 2);
+    const p1 = c.clone().sub(dir), p2 = c.clone().add(dir);
+    p1.y = Math.max(p1.y, 0.03); p2.y = Math.max(p2.y, 0.03);
+    limb(p1, p2, 0.024, 0.024, steelMat, scene, false);
+    if (i % 3 === 0) box(0.07, 0.07, 0.09, steelMat, p2.x, p2.y, p2.z, scene, 0.01); // coupler
+  }
+  // frames leaning against the wall
+  for (let i = 0; i < 4; i++) {
+    const x = cx - 0.7 + i * 0.45;
+    limb(V(x, 0.03, cz + 0.25), V(x + rr(-0.3, 0.3), 1.1, cz - 0.4), 0.024, 0.024, steelMat, scene, false);
+    limb(V(x - 0.3, 0.6, cz - 0.05), V(x + 0.35, 0.45, cz - 0.05), 0.02, 0.02, steelMat, scene, false);
+  }
+}
+
+// push the back of the yard away from the camera
+for (const o of scene.children.slice(backStart)) o.position.z -= 3.6;
+
+// big column on the left, in front of the grate
+box(0.85, 12, 0.85, clay, -3.3, 6, -1.53, scene, 0.02);
+
+/* ------------------------------------------------------------------ */
+/* Timber stack on a pallet (right foreground)                         */
+/* ------------------------------------------------------------------ */
+{
+  const g = new THREE.Group();
+  g.position.set(2.6, 0, -0.27);
+  g.rotation.y = -0.04;
+  scene.add(g);
+
+  // skids / bearers
+  for (const x of [-1.25, 0.05, 1.3]) {
+    box(0.1, 0.1, 1.55, clay, x, 0.05, 0, g, 0.01);
+    box(0.16, 0.05, 1.55, clay, x, 0.125, 0, g, 0.01);
+  }
+
+  const DEPTH = 1.4;
+  let y = 0.15;
+  const packs = [
+    { layers: 4, len: 3.35, off: 0.0 },
+    { layers: 5, len: 3.55, off: 0.1 }
+  ];
+  packs.forEach((p, pi) => {
+    const y0 = y;
+    for (let l = 0; l < p.layers; l++) {
+      const t = rr(0.085, 0.105);
+      let z = -DEPTH / 2;
+      while (z < DEPTH / 2 - 0.05) {
+        const w = Math.min(rr(0.22, 0.34), DEPTH / 2 - z);
+        const len = p.len + rr(-0.07, 0.03);
+        const b = box(len, t - 0.006, w - 0.012, timber,
+          p.off + rr(-0.03, 0.03), y + t / 2, z + w / 2, g, 0.008);
+        b.rotation.y = rr(-0.004, 0.004);
+        z += w;
+      }
+      y += t;
+    }
+    // straps around this pack
+    const h = y - y0;
+    for (const sx of pi === 0 ? [-0.85, 1.1] : [-0.55]) {
+      const x = p.off + sx;
+      box(0.05, 0.008, DEPTH + 0.02, strapMat, x, y + 0.004, 0, g);
+      box(0.05, h + 0.01, 0.008, strapMat, x, y0 + h / 2, DEPTH / 2 + 0.006, g);
+      box(0.05, h + 0.01, 0.008, strapMat, x, y0 + h / 2, -DEPTH / 2 - 0.006, g);
+    }
+    // battens between packs
+    if (pi === 0) {
+      for (const x of [-1.2, 0.1, 1.25]) box(0.08, 0.06, DEPTH, clay, x, y + 0.03, 0, g, 0.01);
+      y += 0.06;
+    }
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* Worker                                                              */
+/* ------------------------------------------------------------------ */
+function buildVestTexture() {
+  return canvasTexture(1024, 512, (g, w, h) => {
+    const orange = '#f0441c', yellow = '#e3f21e';
+    g.fillStyle = orange; g.fillRect(0, 0, w, h);
+    // vest spans y 1.00 (bottom, canvas y=h) → 1.48 (top, canvas y=0)
+    const yToPx = (yy) => (1.48 - yy) / 0.48 * h;
+    const band = 0.038 / 0.48 * h;
+    g.fillStyle = yellow;
+    for (const yy of [1.235, 1.115]) g.fillRect(0, yToPx(yy) - band / 2, w, band);
+    // vertical front stripes running over the shoulders (front is u = 0.5)
+    const du = 0.034 * w;
+    for (const u of [0.5 - 0.075, 0.5 + 0.075]) g.fillRect(u * w - du / 2, 0, du, yToPx(1.235));
+    // X on the back (back is u = 0 / 1)
+    g.lineWidth = du; g.strokeStyle = yellow;
+    g.beginPath();
+    g.moveTo(0.075 * w, 0); g.lineTo(0, yToPx(1.32)); g.lineTo(-0.075 * w, 0);
+    g.moveTo(w - 0.075 * w, 0); g.lineTo(w, yToPx(1.32)); g.lineTo(w + 0.075 * w, 0);
+    g.stroke();
+    // V-neck opening showing the shirt
+    g.fillStyle = '#eef0f2';
+    g.beginPath();
+    g.moveTo((0.5 - 0.055) * w, 0); g.lineTo(0.5 * w, yToPx(1.33)); g.lineTo((0.5 + 0.055) * w, 0);
+    g.closePath(); g.fill();
+    // zipper + pocket
+    g.fillStyle = '#9b2a10';
+    g.fillRect(0.5 * w - 2, yToPx(1.33), 4, h);
+    g.strokeStyle = 'rgba(120,30,10,0.55)'; g.lineWidth = 3;
+    g.strokeRect(0.545 * w, yToPx(1.40), 0.04 * w, yToPx(1.30) - yToPx(1.40));
+  });
+}
+
+function buildWorker() {
+  const W = new THREE.Group();
+  const shirt = clay, pants = clay;
+
+  // --- torso (lathe, flattened front-to-back) ---
+  const torsoProfile = [
+    [0.150, 0.90], [0.168, 0.96], [0.160, 1.04], [0.152, 1.12], [0.160, 1.22],
+    [0.185, 1.32], [0.192, 1.40], [0.175, 1.455], [0.12, 1.49], [0.065, 1.51], [0.0, 1.512]
+  ].map(([r, y]) => new THREE.Vector2(r, y));
+  const torso = new THREE.Mesh(new THREE.LatheGeometry(torsoProfile, 48), shirt);
+  torso.scale.z = 0.62;
+  W.add(torso);
+
+  // --- vest (lathe sharing the torso silhouette, evenly spaced rows for clean UVs) ---
+  const radiusAt = (y) => {
+    for (let i = 0; i < torsoProfile.length - 1; i++) {
+      const a = torsoProfile[i], b = torsoProfile[i + 1];
+      if (y >= a.y && y <= b.y) return THREE.MathUtils.lerp(a.x, b.x, (y - a.y) / (b.y - a.y));
+    }
+    return 0.15;
+  };
+  const vestProfile = [];
+  for (let i = 0; i <= 24; i++) {
+    const y = 1.0 + 0.48 * i / 24;
+    const flare = y < 1.06 ? 0.006 : 0;
+    vestProfile.push(new THREE.Vector2(radiusAt(y) + 0.014 + flare, y));
+  }
+  const vest = new THREE.Mesh(
+    new THREE.LatheGeometry(vestProfile, 64, Math.PI, Math.PI * 2),
+    new THREE.MeshStandardMaterial({ map: buildVestTexture(), roughness: 0.75, side: THREE.DoubleSide })
+  );
+  vest.scale.z = 0.66;
+  W.add(vest);
+
+  // collar
+  const collar = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.085, 0.05, 24, 1, true), shirt);
+  collar.position.y = 1.505;
+  collar.scale.z = 0.85;
+  W.add(collar);
+
+  // pelvis
+  const pelvis = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 16), pants);
+  pelvis.scale.set(0.165, 0.11, 0.105);
+  pelvis.position.y = 0.92;
+  W.add(pelvis);
+
+  // --- legs ---
+  const legs = [
+    { hip: V(-0.095, 0.9, 0), knee: V(-0.105, 0.5, 0.01), ankle: V(-0.12, 0.11, -0.01), yaw: -0.1 },
+    { hip: V(0.095, 0.9, 0), knee: V(0.135, 0.5, 0.05), ankle: V(0.175, 0.11, 0.08), yaw: 0.35 }
+  ];
+  for (const L of legs) {
+    limb(L.hip, L.knee, 0.097, 0.075, pants, W);
+    limb(L.knee, L.ankle, 0.072, 0.066, pants, W);
+    // boot
+    const boot = new THREE.Group();
+    boot.position.set(L.ankle.x, 0, L.ankle.z);
+    boot.rotation.y = L.yaw;
+    W.add(boot);
+    box(0.105, 0.085, 0.27, skin, 0, 0.0425, 0.045, boot, 0.035);  // sole + toe
+    box(0.1, 0.06, 0.12, skin, 0, 0.1, 0.0, boot, 0.03);           // ankle shaft
+    box(0.112, 0.02, 0.28, clayDark, 0, 0.01, 0.045, boot, 0.008);  // sole edge
+  }
+
+  // --- arms ---
+  const shR = V(-0.215, 1.41, 0), elR = V(-0.24, 1.13, 0.0), wrR = V(-0.245, 0.88, 0.05);
+  limb(shR, elR, 0.062, 0.05, shirt, W);
+  limb(elR, wrR, 0.049, 0.038, shirt, W);
+  const handR = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 16), skin);
+  handR.scale.set(0.03, 0.078, 0.048);
+  handR.position.set(-0.247, 0.81, 0.06);
+  handR.rotation.z = -0.05;
+  W.add(handR);
+  const thumbR = new THREE.Mesh(new THREE.CapsuleGeometry(0.013, 0.04, 4, 8), skin);
+  thumbR.position.set(-0.23, 0.83, 0.1);
+  thumbR.rotation.x = 0.5;
+  W.add(thumbR);
+
+  // left arm reaching out toward the timber stack
+  const shL = V(0.215, 1.41, 0), elL = V(0.36, 1.27, 0.17), wrL = V(0.53, 1.19, 0.33);
+  limb(shL, elL, 0.062, 0.05, shirt, W);
+  limb(elL, wrL, 0.049, 0.038, shirt, W);
+  const hand = new THREE.Group();
+  hand.position.copy(wrL);
+  hand.lookAt(wrL.clone().add(new THREE.Vector3().subVectors(wrL, elL)));
+  W.add(hand);
+  const palm = box(0.085, 0.028, 0.1, skin, 0, 0, 0.055, hand, 0.012);
+  palm.rotation.x = 0.25;
+  for (let f = 0; f < 4; f++) {                               // slightly curled fingers
+    const finger = new THREE.Mesh(new THREE.CapsuleGeometry(0.0095, 0.045, 4, 8), skin);
+    finger.position.set(-0.03 + f * 0.02, -0.03, 0.125 - Math.abs(f - 1.5) * 0.008);
+    finger.rotation.x = Math.PI / 2 + 0.6;
+    hand.add(finger);
+  }
+  const thumbL = new THREE.Mesh(new THREE.CapsuleGeometry(0.011, 0.04, 4, 8), skin);
+  thumbL.position.set(-0.05, 0.0, 0.05);
+  thumbL.rotation.set(Math.PI / 2, 0, 0.7);
+  hand.add(thumbL);
+
+  // --- neck & head ---
+  limb(V(0, 1.47, 0), V(0, 1.58, 0.005), 0.058, 0.052, skin, W, false);
+  const head = new THREE.Group();
+  head.position.set(0, 1.575, 0.01);
+  head.rotation.set(0.04, 0.42, 0);
+  W.add(head);
+  const skull = new THREE.Mesh(new THREE.SphereGeometry(0.1, 40, 24), skin);
+  skull.scale.set(0.86, 1.08, 1.0);
+  skull.position.set(0, 0.085, -0.005);
+  head.add(skull);
+  const jaw = new THREE.Mesh(new THREE.SphereGeometry(0.072, 32, 16), skin);
+  jaw.scale.set(0.95, 0.85, 1.0);
+  jaw.position.set(0, 0.035, 0.03);
+  head.add(jaw);
+  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.014, 0.04, 12), skin);
+  nose.rotation.x = Math.PI / 2 + 0.35;
+  nose.position.set(0, 0.075, 0.1);
+  head.add(nose);
+  const brow = new THREE.Mesh(new THREE.CapsuleGeometry(0.012, 0.07, 4, 12), skin);
+  brow.rotation.z = Math.PI / 2;
+  brow.position.set(0, 0.105, 0.085);
+  head.add(brow);
+  for (const s of [-1, 1]) {
+    const ear = new THREE.Mesh(new THREE.SphereGeometry(0.024, 16, 12), skin);
+    ear.scale.set(0.45, 1, 0.75);
+    ear.position.set(s * 0.086, 0.08, -0.005);
+    head.add(ear);
+  }
+
+  // hard hat
+  const hat = new THREE.Group();
+  hat.position.set(0, 0.125, -0.005);
+  hat.rotation.x = -0.08;
+  head.add(hat);
+  const shell = new THREE.Mesh(new THREE.SphereGeometry(0.118, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2), helmetMat);
+  shell.scale.set(1.0, 0.9, 1.14);
+  hat.add(shell);
+  const brim = new THREE.Mesh(new THREE.CylinderGeometry(0.132, 0.136, 0.012, 48), helmetMat);
+  brim.scale.set(1, 1, 1.2);
+  brim.position.set(0, 0.002, 0.012);
+  hat.add(brim);
+  const peak = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.01, 32, 1, false, -Math.PI / 2, Math.PI), helmetMat);
+  peak.scale.set(1, 1, 0.55);
+  peak.position.set(0, 0.006, 0.105);
+  peak.rotation.x = 0.12;
+  hat.add(peak);
+  const ridge = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.011, 8, 32, Math.PI), helmetMat);
+  ridge.rotation.y = Math.PI / 2;
+  ridge.scale.set(1.0, 1.04, 1.15);
+  hat.add(ridge);
+
+  return W;
+}
+
+const worker = buildWorker();
+worker.position.set(0, 0, 0);
+worker.rotation.y = 0.18;
+scene.add(worker);
+
+/* ------------------------------------------------------------------ */
+/* Shadows on everything                                               */
+/* ------------------------------------------------------------------ */
+scene.traverse((o) => {
+  if (o.isMesh) { o.castShadow = !o.userData.noShadow; o.receiveShadow = true; }
+});
+ground.castShadow = false;
+
+/* ------------------------------------------------------------------ */
+/* Post-processing: ambient occlusion for the soft clay look           */
+/* ------------------------------------------------------------------ */
+const size = renderer.getDrawingBufferSize(new THREE.Vector2());
+const composer = new EffectComposer(renderer,
+  new THREE.WebGLRenderTarget(size.x, size.y, { samples: 4, type: THREE.HalfFloatType }));
+composer.addPass(new RenderPass(scene, camera));
+const gtao = new GTAOPass(scene, camera, size.x, size.y);
+gtao.output = GTAOPass.OUTPUT.Default;
+gtao.blendIntensity = 0.9;
+gtao.updateGtaoMaterial({ radius: 0.6, distanceExponent: 1.5, thickness: 1.5, scale: 1.0, samples: 16 });
+gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, rings: 2, samples: 16 });
+composer.addPass(gtao);
+composer.addPass(new OutputPass());
+
+/* ------------------------------------------------------------------ */
+/* Resize + loop                                                       */
+/* ------------------------------------------------------------------ */
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setPixelRatio(renderer.getPixelRatio());
+  composer.setSize(window.innerWidth, window.innerHeight);
+});
+
+renderer.setAnimationLoop(() => {
+  controls.update();
+  composer.render();
+});
+</script>
+</body>
+</html>
