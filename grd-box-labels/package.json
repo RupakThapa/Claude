@@ -1,0 +1,14 @@
+{
+  "name": "grd-box-labels",
+  "private": true,
+  "description": "Builds the layered Garden Road Distributors box-label PSD",
+  "scripts": {
+    "prep": "python3 prep_assets.py",
+    "build": "node build_psd.js"
+  },
+  "dependencies": {
+    "@expo-google-fonts/montserrat": "0.2.3",
+    "ag-psd": "20.2.3",
+    "canvas": "3.2.3"
+  }
+}
